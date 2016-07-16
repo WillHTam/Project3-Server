@@ -1,6 +1,6 @@
 # Project 3 Server Side
 
-## Team-members
+## Team Members
 * Justin Chan (Github: juschan)
 * Angel Coco Chen (Github: Sprazzeus)
 * William Tam (Github: WillHTam)
