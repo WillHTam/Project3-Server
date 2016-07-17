@@ -3,6 +3,9 @@ var router = express.Router()
 var applicationController = require('../controllers/application_controller')
 var User = require('../models/user')
 const bodyParser = require('body-parser')
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: true }))
+
 
 /* GET home */
 router.get('/', function (req, res, next) {
@@ -11,14 +14,14 @@ router.get('/', function (req, res, next) {
 })
 
 /* POST new user */
-// router.post('/signup', (req, res) => {
-//   const user = new User(req.body.user)
-//   console.log(req.body.user)
-//   user.save((err, user) => {
-//     if (err) return res.status(401).json({error: err.message})
-//     res.status(201).json({message: 'User created.', auth_token: user.auth_token})
-//   })
-// })
+router.post('/signup', (req, res) => {
+  const user = new User(req.body.user)
+  console.log(req.body.user)
+  user.save((err, user) => {
+    if (err) return res.status(401).json({error: err.message})
+    res.status(201).json({message: 'User created.', auth_token: user.auth_token})
+  })
+})
 
 router.post('/login', (req, res) => {
   const userParams=req.body.user
