@@ -8,7 +8,8 @@ var cheeses = [ 'danish blue', 'sterling blue']
 
 /* GET home */
 router.get('/', function(req, res, next) {
-  res.status(200).res.render('../views/index.ejs');
+  res.status(200)
+  res.render('../views/index.ejs');
 });
 
 /* GET apples */

@@ -4,6 +4,14 @@ const supertest = require('supertest')
 const api = supertest('http://localhost:3000')
 const app = require('../app')
 
+describe('GET /', () => {
+  it('should return a 200 response', (done) => {
+    api.get('/')
+    .set('Accept', 'application/html')
+    .expect(200, done)
+  })
+})
+
 describe('GET /apples', () => {
   it('should return a 200 response', (done) => {
     api.get('/apples')
