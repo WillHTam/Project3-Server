@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var applicationController = require('../controllers/application_controller')
+var resourceController = require('../controllers/resource_controller')
 var User = require('../models/user')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
@@ -34,6 +35,25 @@ router.post('/login', (req, res) => {
     })
   })
 })
+
+// ADDITIONS!!!!!!!!!
+
+// VIEW MY resources
+
+router.get('/resources', resourceController.seeMyResources)
+
+// CREATE resource
+
+router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
+
+// EDIT resource
+
+router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
+
+// DELETE resource
+router.delete(applicationController.userLoggedIn, resourceController.deleteResource)
+
+// END OF ADDITIONS
 
 router.get('/secret', applicationController.userLoggedIn, (req, res) => {
   res.status(200).json({secret: 'hello ' + req.currentUser.email})

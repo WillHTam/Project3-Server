@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
+const Resource = require('./resources')
 
 const userSchema = new mongoose.Schema({
   id: Number,
@@ -8,9 +9,9 @@ const userSchema = new mongoose.Schema({
   last_name: String,
   email: {type: String, unique: true, required: true},
   password: {type: String, required: true},
-  auth_token: {type: String, unique: true}
+  auth_token: {type: String, unique: true},
+  resources: [Resource.schema]
 })
-
 
 userSchema.pre('save', function (next) {
   const user = this
