@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const logger = require('morgan');
 // const appController = require('./controllers/application_controller');
 const port = process.env.PORT || 3000;
