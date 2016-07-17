@@ -39,15 +39,12 @@ router.post('/login', (req, res) => {
 // ADDITIONS!!!!!!!!!
 
 // VIEW MY resources
-
-router.get('/resources', resourceController.seeMyResources)
+router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
 
 // CREATE resource
-
 router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
 
 // EDIT resource
-
 router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
 
 // DELETE resource

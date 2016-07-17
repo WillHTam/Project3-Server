@@ -35,12 +35,12 @@ app.use(function (req, res, next) {
 //   })
 // })
 
-let bob = new User({
-  first_name: 'Bob',
-  last_name: 'Segel',
-  email: 'bob@bob.com',
-  password: 'bob'
-})
+// let bob = new User({
+//   first_name: 'Bob',
+//   last_name: 'Segel',
+//   email: 'bob@bob.com',
+//   password: 'bob'
+// })
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
