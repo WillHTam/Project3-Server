@@ -6,6 +6,12 @@ var pears = ['pear1', 'pear2']
 var bananas = ['big banana','small banana']
 var cheeses = [ 'danish blue', 'sterling blue']
 
+/* GET home */
+router.get('/', function(req, res, next) {
+  res.status(200).json(apples);
+});
+
+
 /* GET apples */
 router.get('/apples', function(req, res, next) {
   res.status(200).json(apples);
