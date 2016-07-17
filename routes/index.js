@@ -6,7 +6,6 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
-
 /* GET home */
 router.get('/', function (req, res, next) {
   res.status(200)
@@ -24,7 +23,7 @@ router.post('/signup', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  const userParams=req.body.user
+  const userParams = req.body.user
   User.findOne({email: userParams.email}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
 
