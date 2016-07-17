@@ -3,7 +3,7 @@ var router = express.Router();
 var apples = [ 'grannies', 'green']
 var oranges = [ 'sunkist', 'I like this' ]
 var pears = ['pear1', 'pear2']
-var bananas = ['big banana','small banana']
+var bananas = ['big banana', 'small banana']
 var cheeses = [ 'danish blue', 'sterling blue']
 
 /* GET home */
