@@ -15,9 +15,10 @@ router.get('/', function (req, res, next) {
 
 /* POST new user */
 router.post('/register', (req, res) => {
-  const user = new User(req.body.user)
+  const user = new User(req.body)
+  console.log(req.body)
   user.save((err, user) => {
-    if (err) return res.status(401).json({error: err.message})
+    if (err) return res.status(401).json({error: 'ERROR! Could not create user.'})
     res.status(201).json({message: 'User created.'}) // ,  auth_token: user.auth_token})
   })
 })

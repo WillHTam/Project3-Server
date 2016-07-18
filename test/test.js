@@ -5,10 +5,6 @@ const supertest = require('supertest')
 const api = supertest('http://localhost:3000')
 const app = require('../app')
 
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
 describe('GET /', () => {
   it('should return a 200 response', (done) => {
     api.get('/')
@@ -17,14 +13,14 @@ describe('GET /', () => {
   })
 })
 
-describe('POST /register', () => {
+describe('POST /register', function() {
+  this.timeout(10000)
   it('should return "User created." message', (done) => {
     api.post('/register')
     .set('Accept', 'application/html')
     .send({first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'})
     .expect(201)
     .end( (err, response) => {
-      console.log(response)
       expect(response.body.message).to.equal('User created.')
       done()
     })
@@ -46,10 +42,6 @@ describe('GET /allresources', () => {
     .expect(200, done)
   })
 })
-
-
-
-
 
 // describe('GET /apples', () => {
 //   it('should return a 200 response', (done) => {
