@@ -14,19 +14,19 @@ users = [
 ]
 
 resources = [
-  {id: 1, title: 'Title 1', url: 'http://www.bbc.co.uk', tags: ['news', 'UK'] },
-  {id: 2, title: 'Title 2', url: 'http://www.cnn.com', tags: ['news', 'USA'], user: '578c75c738dfc574e632da7e' },
-  {id: 3, title: 'Title 3', url: 'http://www.todayonline.com', tags: ['news', 'Singapore'], user: '578c75c738dfc574e632da7e' },
-  {id: 4, title: 'Title 4', url: 'http://www.dailymail.co.uk', tags: ['news', 'UK'], user: '578c75c738dfc574e632da7e'},
-  {id: 5, title: 'Title 5', url: 'http://www.mrbrown.com', tags: ['satire', 'Singapore'], user: '578c75c738dfc574e632da7e'}
+  {title: 'Title 1', url: 'http://www.bbc.co.uk', tags: ['news', 'UK']},
+  {title: 'Title 2', url: 'http://www.cnn.com', tags: ['news', 'USA']},
+  {title: 'Title 3', url: 'http://www.todayonline.com', tags: ['news', 'Singapore']},
+  {title: 'Title 4', url: 'http://www.dailymail.co.uk', tags: ['news', 'UK']},
+  {title: 'Title 5', url: 'http://www.mrbrown.com', tags: ['satire', 'Singapore']}
 ]
 
 describe('GET /', () => {
-  // before ((done) => {
-  //   User.find().remove((err) => console.log('delete all users'))
-  //   Resources.find().remove((err) => console.log('delete all resources'))
-  //   done()
-  // })
+  before ((done) => {
+    User.find().remove((err) => console.log('delete all users'))
+    Resources.find().remove((err) => console.log('delete all resources'))
+    done()
+  })
   it('should return a 200 response', (done) => {
     api.get('/')
     .set('Accept', 'application/html')
@@ -37,7 +37,7 @@ describe('GET /', () => {
 describe('POST /register', function() {
   this.timeout(10000)
 
-  xit('should return "User created." message', (done) => {
+  it('should return "User created." message', (done) => {
     api.post('/register')
     .set('Accept', 'application/html')
     .send(users[0])
@@ -48,7 +48,7 @@ describe('POST /register', function() {
       })
   })
 
-  xit('should return "User created." message', (done) => {
+  it('should return "User created." message', (done) => {
     api.post('/register')
     .set('Accept', 'application/html')
     .send(users[1])
@@ -63,58 +63,50 @@ describe('POST /register', function() {
 describe('POST /resources', function() {
   this.timeout(10000)
 
-  before ((done) => {
-    User.find().remove((err) => console.log('delete all users'))
-    Resources.find().remove((err) => console.log('delete all resources'))
-    done()
+  // before ((done) => {
+  //   // User.find().remove((err) => console.log('delete all users'))
+  //   Resources.find().remove((err) => console.log('delete all resources'))
+  //   done()
+  // })
+
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+      .send(resources[0])
+      .set('Accept', 'application/html')
+      .set('User-email', 'juschanuk@gmail.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response', function(done) {
+    api.post('/resources')
+      .send(resources[1])
+      .set('Accept', 'application/html')
+      .set('User-email', 'william.tam@gmail.com')
+      .expect(201, done)
   })
 
   it('should return a 200 response', (done) => {
-
-    User.findOne({first_name: 'Justin'}, (err, user) => {
-      if (err || !user) return res.status(401).json({error: 'Cannot find user'})
-
-      var r = resources[0]
-      r.user = user.id
-      api.post('/resources')
-      .send(r)
+    api.post('/resources')
+      .send(resources[2])
       .set('Accept', 'application/html')
+      .set('User-email', 'juschanuk@gmail.com')
       .expect(201, done)
-    })
-
-
   })
 
-  xit('should return a 200 response', (done) => {
-    appController.userFind()
+  it('should return a 200 response', (done) => {
     api.post('/resources')
-    .send(resources[1])
-    .set('Accept', 'application/html')
-    .expect(201, done)
+      .send(resources[3])
+      .set('Accept', 'application/html')
+      .set('User-email', 'juschanuk@gmail.com')
+      .expect(201, done)
   })
 
-  xit('should return a 200 response', (done) => {
-    appController.userFind()
+  it('should return a 200 response', (done) => {
     api.post('/resources')
-    .send(resources[2])
-    .set('Accept', 'application/html')
-    .expect(201, done)
-  })
-
-  xit('should return a 200 response', (done) => {
-    appController.userFind()
-    api.post('/resources')
-    .send(resources[3])
-    .set('Accept', 'application/html')
-    .expect(201, done)
-  })
-
-  xit('should return a 200 response', (done) => {
-    appController.userFind()
-    api.post('/resources')
-    .send(resources[4])
-    .set('Accept', 'application/html')
-    .expect(201, done)
+      .send(resources[4])
+      .set('Accept', 'application/html')
+      .set('User-email', 'juschanuk@gmail.com')
+      .expect(201, done)
   })
 })
 

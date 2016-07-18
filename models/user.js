@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
-// const Resource = require('./resources')
 
 const userSchema = new mongoose.Schema({
   id: Number,
