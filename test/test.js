@@ -63,12 +63,6 @@ describe('POST /register', function() {
 describe('POST /resources', function() {
   this.timeout(10000)
 
-  // before ((done) => {
-  //   // User.find().remove((err) => console.log('delete all users'))
-  //   Resources.find().remove((err) => console.log('delete all resources'))
-  //   done()
-  // })
-
   it('should return a 200 response', (done) => {
     api.post('/resources')
       .send(resources[0])
@@ -115,5 +109,38 @@ describe('GET /allresources', () => {
     api.get('/allresources')
     .set('Accept', 'application/html')
     .expect(200, done)
+  })
+})
+
+describe('POST /login', () => {
+  it('should return a 200 response and auth_token', (done) => {
+    var user = {email: users[0].email, password: users[0].password }
+    api.post('/login')
+    .send({user})
+    .set('Accept', 'application/html')
+    .expect(200)
+    .end( (err, response) => {
+      expect(response.body.message).to.equal('User logged in')
+      expect(response.body.auth_token).to.exist
+      done()
+      })
+  })
+})
+
+describe('DELETE /deleteUser', () => {
+  xit('should remove a user', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      if (err) res.status(422).json({message: 'Error deleting user'})
+      else { 
+        api.delete('/deleteUser')
+        .send({user})
+        .set('Accept', 'application/html')
+        .expect(200)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('User deleted')
+          done()
+        })
+      }
+    })
   })
 })
