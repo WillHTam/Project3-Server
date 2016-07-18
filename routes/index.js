@@ -36,6 +36,8 @@ router.post('/login', (req, res) => {
   })
 })
 
+// INIT - to be run every time mocha is return
+
 // LOGOUT
 
 // ADDITIONS!!!!!!!!!

@@ -13,6 +13,13 @@ function userLoggedIn (req, res, next) {
   })
 }
 
+function userFind (req, res, next) {
+  User.findOne({first_name: 'Justin'}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'Cannot find user'})
+  })
+}
+
 module.exports = {
+  userFind: userFind,
   userLoggedIn: userLoggedIn
 }

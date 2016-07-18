@@ -2,8 +2,8 @@ const Resource = require('../models/resources')
 const User = require('../models/user')
 
 users = [
-  {id: '578b441c3f572d70d1076a03', first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
-  {id: '578b441c3f572d70d1076a03', first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'}
+  {first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
+  {first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'}
 ]
 
 resources = [
@@ -30,15 +30,20 @@ function seeMyResources (req, res) {
 }
 
 function makeNewResource (req, res) {
-  resources[0].save
-  res.status(200).json({message: 'Resource created', resources})
-  // const resource = new Resource(req.body)
-  // resource.push(resource)
-  //
-  // resource.save((err, resource) => {
-  //   if (err) return res.status(401).json({error: 'error!'})
-  //   res.status(200).json({message: 'Resource created', resource})
-  // })
+  var resource = new Resource(req.body)
+  const userEmail = req.get('User-email')
+  // console.log(req.body)
+  // console.log(userEmail)
+
+  User.findOne({email: userEmail}, (err, user) => {
+    if (err) return res.status(401).json({error: 'Unable to find user'})
+    resource.user = user._id
+    resource.save((err, resource) => {
+      // console.log(err)
+      if (err) return res.status(401).json({error: 'error!'})
+      res.status(201).json({message: 'Resource created', resource})
+    })
+  })
 }
 
 function updateResource (req, res) {
