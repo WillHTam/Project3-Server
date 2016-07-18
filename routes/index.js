@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 })
 
 /* POST new user */
-router.post('/signup', (req, res) => {
+router.post('/register', (req, res) => {
   const user = new User(req.body.user)
   console.log(req.body.user)
   user.save((err, user) => {
@@ -35,6 +35,8 @@ router.post('/login', (req, res) => {
     })
   })
 })
+
+// LOGOUT
 
 // ADDITIONS!!!!!!!!!
 
