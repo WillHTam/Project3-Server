@@ -40,6 +40,8 @@ router.post('/login', (req, res) => {
 
 // ADDITIONS!!!!!!!!!
 
+router.get('/allresources', resourceController.showAllResources)
+
 // VIEW MY resources
 router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
 

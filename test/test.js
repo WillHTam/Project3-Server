@@ -12,6 +12,14 @@ describe('GET /', () => {
   })
 })
 
+describe('GET /allresources', () => {
+  it('should return a 200 response', (done) => {
+    api.get('/allresources')
+    .set('Accept', 'application/html')
+    .expect(200, done)
+  })
+})
+
 // describe('GET /apples', () => {
 //   it('should return a 200 response', (done) => {
 //     api.get('/apples')
