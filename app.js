@@ -25,16 +25,6 @@ app.use(function (req, res, next) {
   next()
 })
 
-/* POST new user */
-// app.post('/signup', (req, res) => {
-//   const user = new User(req.body.user)
-//   console.log(req.body.user)
-//   user.save((err, user) => {
-//     if (err) return res.status(401).json({error: err.message})
-//     res.status(201).json({message: 'User created.', auth_token: user.auth_token})
-//   })
-// })
-
 // let bob = new User({
 //   first_name: 'Bob',
 //   last_name: 'Segel',
