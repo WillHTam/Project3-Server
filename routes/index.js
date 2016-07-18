@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
     user.authenticate(userParams.password, (err, isMatch) => {
       if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
 
-      res.status(201).json({message: 'User logged in', auth_token: user.auth_token})
+      res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
     })
   })
 })
