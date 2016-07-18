@@ -12,7 +12,6 @@ var routes = require('./routes/index')
 
 const app = express()
 
-app.use('/', routes)
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -25,12 +24,7 @@ app.use(function (req, res, next) {
   next()
 })
 
-// let bob = new User({
-//   first_name: 'Bob',
-//   last_name: 'Segel',
-//   email: 'bob@bob.com',
-//   password: 'bob'
-// })
+app.use('/', routes)
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
