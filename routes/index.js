@@ -15,10 +15,7 @@ router.get('/', function (req, res, next) {
 
 /* POST new user */
 router.post('/register', (req, res) => {
-  //const user = new User(req.body.user)
-  //console.log("In routes > post > /register > for new users")
-  //console.log(req.body.user)
-  const user = new User ({first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'})
+  const user = new User(req.body.user)
   user.save((err, user) => {
     if (err) return res.status(401).json({error: err.message})
     res.status(201).json({message: 'User created.'}) // ,  auth_token: user.auth_token})
