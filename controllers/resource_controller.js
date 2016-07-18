@@ -2,8 +2,8 @@ const Resource = require('../models/resources')
 const User = require('../models/user')
 
 users = [
-  {id: '578b441c3f572d70d1076a03', first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
-  {id: '578b441c3f572d70d1076a03', first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'}
+  {first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
+  {first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'}
 ]
 
 resources = [
@@ -30,15 +30,13 @@ function seeMyResources (req, res) {
 }
 
 function makeNewResource (req, res) {
-  resources[0].save
-  res.status(200).json({message: 'Resource created', resources})
-  // const resource = new Resource(req.body)
-  // resource.push(resource)
-  //
-  // resource.save((err, resource) => {
-  //   if (err) return res.status(401).json({error: 'error!'})
-  //   res.status(200).json({message: 'Resource created', resource})
-  // })
+  // res.status(201).json({message: 'Resource created', resources})
+  const resource = new Resource(req.body)
+
+  resource.save((err, resource) => {
+    if (err) return res.status(401).json({error: 'error!'})
+    res.status(201).json({message: 'Resource created', resource})
+  })
 }
 
 function updateResource (req, res) {
