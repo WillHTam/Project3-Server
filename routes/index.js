@@ -35,6 +35,23 @@ router.post('/login', (req, res) => {
   })
 })
 
+
+router.delete('/deleteUser', (req, res) => {
+  console.log("In delete User")
+  const userEmail = req.body.email
+  console.log("Delete User, UserParams: " + userEmail)
+  User.findOne({email: userEmail}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
+
+   // user.authenticate(userParams.password, (err, isMatch) => {
+   //   if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
+
+      user.remove()
+      res.status(200).json({message: 'User deleted'})
+    })
+ // })
+})
+
 // INIT - to be run every time mocha is return
 
 // LOGOUT

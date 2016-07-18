@@ -126,3 +126,21 @@ describe('POST /login', () => {
       })
   })
 })
+
+describe('DELETE /deleteUser', () => {
+  xit('should remove a user', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      if (err) res.status(422).json({message: 'Error deleting user'})
+      else { 
+        api.delete('/deleteUser')
+        .send({user})
+        .set('Accept', 'application/html')
+        .expect(200)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('User deleted')
+          done()
+        })
+      }
+    })
+  })
+})
