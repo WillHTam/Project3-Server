@@ -15,9 +15,9 @@ resources = [
 ]
 
 function showAllResources (req, res, err) {
-  // TODO: error if statement creates issue
-  // if (err) return res.status(401).json({error: 'Error'})
-  res.status(200).json(resources)
+  Resource.find({}, function (err, resources) {
+    res.status(200).json(resources)
+  })
 }
 
 function seeMyResources (req, res) {
@@ -49,7 +49,6 @@ function makeNewResource (req, res) {
 function updateResource (req, res) {
   const resourceId = req.params.id
   var resource = req.resources.id(resourceId)
-  resource.id = req.body.id
   resource.title = req.body.title
   resource.url = req.body.url
   resource.tags = req.body.tags
