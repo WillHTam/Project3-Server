@@ -12,6 +12,27 @@ describe('GET /', () => {
   })
 })
 
+describe('POST /register', () => {
+  it('should return "User created." message', (done) => {
+    api.post('/register')
+    .set('Accept', 'application/html')
+    .send({first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'})
+    .expect(201)
+    .end( (err, response) => {
+      expect(response.body.message).to.equal('User created.')
+      done()
+    })
+  })
+})
+
+describe('POST /resources', () => {
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+    .set('Accept', 'application/html')
+    .expect(200, done)
+  })
+})
+
 describe('GET /allresources', () => {
   it('should return a 200 response', (done) => {
     api.get('/allresources')
@@ -19,6 +40,10 @@ describe('GET /allresources', () => {
     .expect(200, done)
   })
 })
+
+
+
+
 
 // describe('GET /apples', () => {
 //   it('should return a 200 response', (done) => {

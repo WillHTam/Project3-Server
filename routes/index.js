@@ -15,11 +15,13 @@ router.get('/', function (req, res, next) {
 
 /* POST new user */
 router.post('/register', (req, res) => {
-  const user = new User(req.body.user)
-  console.log(req.body.user)
+  //const user = new User(req.body.user)
+  //console.log("In routes > post > /register > for new users")
+  //console.log(req.body.user)
+  const user = new User ({first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'})
   user.save((err, user) => {
     if (err) return res.status(401).json({error: err.message})
-    res.status(201).json({message: 'User created.', auth_token: user.auth_token})
+    res.status(201).json({message: 'User created.'}) // ,  auth_token: user.auth_token})
   })
 })
 
@@ -43,16 +45,20 @@ router.post('/login', (req, res) => {
 router.get('/allresources', resourceController.showAllResources)
 
 // VIEW MY resources
-router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
+// router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
+router.get('/resources', resourceController.seeMyResources)
 
 // CREATE resource
-router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
+// router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
+router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
-router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
+// router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
+router.route('resources/:id').put(resourceController.updateResource)
 
 // DELETE resource
-router.delete(applicationController.userLoggedIn, resourceController.deleteResource)
+// router.delete(applicationController.userLoggedIn, resourceController.deleteResource)
+router.delete(resourceController.deleteResource)
 
 // END OF ADDITIONS
 
