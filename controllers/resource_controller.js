@@ -32,14 +32,11 @@ function seeMyResources (req, res) {
 function makeNewResource (req, res) {
   var resource = new Resource(req.body)
   const userEmail = req.get('User-email')
-  // console.log(req.body)
-  // console.log(userEmail)
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err) return res.status(401).json({error: 'Unable to find user'})
     resource.user = user._id
     resource.save((err, resource) => {
-      // console.log(err)
       if (err) return res.status(401).json({error: 'error!'})
       res.status(201).json({message: 'Resource created', resource})
     })

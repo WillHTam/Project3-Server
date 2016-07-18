@@ -63,12 +63,6 @@ describe('POST /register', function() {
 describe('POST /resources', function() {
   this.timeout(10000)
 
-  // before ((done) => {
-  //   // User.find().remove((err) => console.log('delete all users'))
-  //   Resources.find().remove((err) => console.log('delete all resources'))
-  //   done()
-  // })
-
   it('should return a 200 response', (done) => {
     api.post('/resources')
       .send(resources[0])
