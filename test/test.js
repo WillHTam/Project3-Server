@@ -62,15 +62,30 @@ describe('POST /register', function() {
 
 describe('POST /resources', function() {
   this.timeout(10000)
-  it('should return a 200 response', (done) => {
-    // appController.userFind()
-    api.post('/resources')
-    .send(resources[0])
-    .set('Accept', 'application/html')
-    .expect(201, done)
+
+  before ((done) => {
+    User.find().remove((err) => console.log('delete all users'))
+    Resources.find().remove((err) => console.log('delete all resources'))
+    done()
   })
 
   it('should return a 200 response', (done) => {
+
+    User.findOne({first_name: 'Justin'}, (err, user) => {
+      if (err || !user) return res.status(401).json({error: 'Cannot find user'})
+
+      var r = resources[0]
+      r.user = user.id
+      api.post('/resources')
+      .send(r)
+      .set('Accept', 'application/html')
+      .expect(201, done)
+    })
+
+
+  })
+
+  xit('should return a 200 response', (done) => {
     appController.userFind()
     api.post('/resources')
     .send(resources[1])
@@ -78,7 +93,7 @@ describe('POST /resources', function() {
     .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  xit('should return a 200 response', (done) => {
     appController.userFind()
     api.post('/resources')
     .send(resources[2])
@@ -86,7 +101,7 @@ describe('POST /resources', function() {
     .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  xit('should return a 200 response', (done) => {
     appController.userFind()
     api.post('/resources')
     .send(resources[3])
@@ -94,7 +109,7 @@ describe('POST /resources', function() {
     .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  xit('should return a 200 response', (done) => {
     appController.userFind()
     api.post('/resources')
     .send(resources[4])
@@ -110,21 +125,3 @@ describe('GET /allresources', () => {
     .expect(200, done)
   })
 })
-
-// describe('GET /apples', () => {
-//   it('should return a 200 response', (done) => {
-//     api.get('/apples')
-//     .set('Accept', 'application/json')
-//     .expect(200, done)
-//   })
-//   it('should return an array', (done) => {
-//     api.get('/apples')
-//     .set('Accept', 'application/json')
-//     .end((error, response) => {
-//       expect(error).to.be.a('null')
-//       expect(response.body).to.be.an('array')
-//       done()
-//     })
-//   })
-// })
-//
