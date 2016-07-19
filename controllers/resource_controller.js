@@ -25,7 +25,6 @@ function makeNewResource (req, res) {
   var resource = new Resource(req.body)
   const userEmail = req.get('email')
 
-  console.log(userEmail)
   User.findOne({email: userEmail}, (err, user) => {
     if (err) return res.status(401).json({error: 'Unable to find user'})
     resource.user = user._id
@@ -39,9 +38,6 @@ function makeNewResource (req, res) {
 function updateResource (req, res) {
   Resource.findById(req.body.id, (err, resource) => {
     if (err) return res.status(401).json({error: 'Cannot find resource'})
-    console.log('req.body: ' + req.body)
-    console.log('req.body.title: ' + req.body.title)
-    console.log(resource)
     resource.title = req.body.title
     resource.url = req.body.url
     resource.tags = req.body.tags

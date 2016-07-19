@@ -74,27 +74,6 @@ describe('POST /register', function() {
   })
 })
 
-describe('PUT /user', function() {
-  xit('should edit the user', (done) => {
-    User.findOne({email: users[0].email}, (err, user) => {
-      if (err) res.status(401).json({error: 'error'})
-      var user1 = {first_name: 'Brian', last_name: 'Lopez', email: 'blopez@gmail.com', password: 'mexico'}
-      console.log('test authtoken: ' + user.auth_token)
-      api.get('/resources')
-      .set('Accept', 'application/html')
-      .set('email', user.email)
-      .set('auth_token', user.auth_token)
-      .send(user1)
-      .expect(200)
-      .end( (err, response) => {
-        console.log('response body: ' + response.body)
-        expect(response.body.message).to.equal('User successfully updated')
-        done()
-        })
-    })
-  })
-})
-
 describe('POST /resources', function() {
   this.timeout(10000)
 
@@ -226,6 +205,25 @@ describe('DELETE /deleteUser', () => {
           done()
         })
       }
+    })
+  })
+})
+
+describe('PUT /user', function() {
+  it('should edit the user', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      if (err) res.status(401).json({error: 'error'})
+      var user1 = {first_name: 'Brian', last_name: 'Lopez', email: 'blopez@gmail.com', password: 'mexico'}
+      api.put('/user')
+      .set('Accept', 'application/html')
+      .set('email', user.email)
+      .set('auth_token', user.auth_token)
+      .send(user1)
+      .expect(200)
+      .end( (err, response) => {
+        expect(response.body.message).to.equal('User successfully updated')
+        done()
+        })
     })
   })
 })
