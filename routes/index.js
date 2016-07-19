@@ -38,7 +38,7 @@ router.post('/login', (req, res) => {
 
 router.delete('/deleteUser', (req, res) => {
   console.log("In delete User")
-  const userEmail = req.body.email
+  const userEmail = req.body.user.email
   console.log("Delete User, UserParams: " + userEmail)
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
@@ -74,7 +74,7 @@ router.route('resources/:id').put(resourceController.updateResource)
 
 // DELETE resource
 // router.delete(applicationController.userLoggedIn, resourceController.deleteResource)
-router.delete(resourceController.deleteResource)
+// router.delete(resourceController.deleteResource)
 
 // END OF ADDITIONS
 
