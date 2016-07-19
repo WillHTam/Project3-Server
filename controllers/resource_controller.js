@@ -61,13 +61,9 @@ function updateResource (req, res) {
 }
 
 function deleteResource (req, res) {
-  const resourceId = req.params.id
-  var resource = req.resources.id(resourceId)
-  req.resource.pull(resource)
-  req.resource.save((err) => {
-    if (err) return res.status(401).json({error: err})
-    res.status(200).json({message: 'Resource deleted'})
-  })
+  const resourceid = req.body.id
+  Resource.findOne({id: resourceid}).remove().exec()
+  res.status(200).json({message: 'Resource deleted'})
 }
 
 module.exports = {

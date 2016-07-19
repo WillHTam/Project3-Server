@@ -14,11 +14,11 @@ users = [
 ]
 
 resources = [
-  {title: 'Title 1', url: 'http://www.bbc.co.uk', tags: ['news', 'UK']},
-  {title: 'Title 2', url: 'http://www.cnn.com', tags: ['news', 'USA']},
-  {title: 'Title 3', url: 'http://www.todayonline.com', tags: ['news', 'Singapore']},
-  {title: 'Title 4', url: 'http://www.dailymail.co.uk', tags: ['news', 'UK']},
-  {title: 'Title 5', url: 'http://www.mrbrown.com', tags: ['satire', 'Singapore']}
+  {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK']},
+  {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA']},
+  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore']},
+  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK']},
+  {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore']}
 ]
 
 describe('GET /', () => {
@@ -131,14 +131,33 @@ describe('POST /login', () => {
     api.post('/login')
     .set('Accept', 'application/html')
     .send(user)
-    // .set({email: 'juschanuk@gmail.com'})
-    // .set({password: 'accounting'})
     .expect(200)
     .end( (err, response) => {
       expect(response.body.message).to.equal('User logged in')
       expect(response.body.auth_token).to.exist
       done()
       })
+  })
+})
+
+describe('DELETE /resources', () => {
+  it('should remove a resource', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      Resources.findOne({user}, (err, resource) => {
+        if (err) res.status(422).json({message: 'Error finding resource'})
+        else {
+          var resourceID = resource._id
+          api.delete('/resources')
+          .send({id: resourceID})
+          .set('Accept', 'application/html')
+          .expect(200)
+          .end( (err, response) => {
+            expect(response.body.message).to.equal('Resource deleted')
+            done()
+          })
+        }
+      })
+    })
   })
 })
 

@@ -28,9 +28,6 @@ router.post('/login', (req, res) => {
   const userParams = new User(req.body)
   User.findOne({email: userParams.email}, (err, user) => {
     if (err || !user) return res.status(405).json({error: 'Cannot find user'})
-
-    console.log(user)
-
     user.authenticate(userParams.password, (err, isMatch) => {
       // console.log('Error: ' + err)
       // console.log('isMatch: ' + isMatch)
@@ -58,10 +55,6 @@ router.delete('/deleteUser', (req, res) => {
  // })
 })
 
-// INIT - to be run every time mocha is return
-
-// LOGOUT
-
 // ADDITIONS!!!!!!!!!
 
 router.get('/allresources', resourceController.showAllResources)
@@ -76,13 +69,10 @@ router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
 // router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
-router.route('resources/:id').put(resourceController.updateResource)
+router.route('/resources/:id').put(resourceController.updateResource)
 
 // DELETE resource
-// router.delete(applicationController.userLoggedIn, resourceController.deleteResource)
-// router.delete(resourceController.deleteResource)
-
-// END OF ADDITIONS
+router.delete('/resources', resourceController.deleteResource)
 
 router.get('/secret', applicationController.userLoggedIn, (req, res) => {
   res.status(200).json({secret: 'hello ' + req.currentUser.email})
