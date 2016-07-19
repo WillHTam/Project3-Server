@@ -1,7 +1,7 @@
 const User = require('../models/user')
 
 function userLoggedIn (req, res, next) {
-  const userEmail = req.get('email')
+  const userEmail = req.get('user_email')
   const authToken = req.get('auth_token')
   if (!userEmail || !authToken) return res.status(401).json({error: 'Unauthorised'})
 

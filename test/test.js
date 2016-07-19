@@ -10,15 +10,18 @@ const appController = require('../controllers/application_controller')
 
 users = [
   {first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
-  {first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'}
+  {first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'},
+  {first_name: 'Angel', last_name: 'Chen', email: 'angel@angel.com', password: 'germany'}
 ]
 
 resources = [
-  {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK'], site_name: 'BBC.co.uk'},
-  {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA'], site_name: 'edition.cnn.com'},
-  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], site_name: 'todayonline.com'},
-  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK'], site_name: 'dailymail.co.uk'},
-  {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com'}
+  {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK'], site_name: 'BBC.co.uk', summary: 'Summary for the first article'},
+  {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA'], site_name: 'edition.cnn.com', summary: 'Summary for the second article'},
+  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], site_name: 'todayonline.com', summary: 'Summary for the third article'},
+  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK'], site_name: 'dailymail.co.uk', summary: 'Summary for the fourth article'},
+  {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the fifth article'},
+  {title: 'Title 6', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SIXTH article'},
+  {title: 'Title 7', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SEVENTH article'}
 ]
 
 describe('GET /', () => {
@@ -58,6 +61,17 @@ describe('POST /register', function() {
       done()
       })
   })
+
+  it('should return "User created." message', (done) => {
+    api.post('/register')
+    .set('Accept', 'application/html')
+    .send(users[2])
+    .expect(201)
+    .end( (err, response) => {
+      expect(response.body.message).to.equal('User created.')
+      done()
+      })
+  })
 })
 
 describe('POST /resources', function() {
@@ -67,7 +81,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[0])
       .set('Accept', 'application/html')
-      .set('User-email', 'juschanuk@gmail.com')
+      .set('user_email', 'juschanuk@gmail.com')
       .expect(201, done)
   })
 
@@ -75,7 +89,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[1])
       .set('Accept', 'application/html')
-      .set('User-email', 'william.tam@gmail.com')
+      .set('user_email', 'william.tam@gmail.com')
       .expect(201, done)
   })
 
@@ -83,7 +97,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[2])
       .set('Accept', 'application/html')
-      .set('User-email', 'juschanuk@gmail.com')
+      .set('user_email', 'juschanuk@gmail.com')
       .expect(201, done)
   })
 
@@ -91,7 +105,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[3])
       .set('Accept', 'application/html')
-      .set('User-email', 'william.tam@gmail.com')
+      .set('user_email', 'william.tam@gmail.com')
       .expect(201, done)
   })
 
@@ -99,7 +113,23 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[4])
       .set('Accept', 'application/html')
-      .set('User-email', 'juschanuk@gmail.com')
+      .set('user_email', 'juschanuk@gmail.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+      .send(resources[5])
+      .set('Accept', 'application/html')
+      .set('user_email', 'angel@angel.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+      .send(resources[6])
+      .set('Accept', 'application/html')
+      .set('user_email', 'angel@angel.com')
       .expect(201, done)
   })
 })
@@ -144,6 +174,8 @@ describe('DELETE /resources', () => {
   it('should remove a resource', (done) => {
     User.findOne({email: users[0].email}, (err, user) => {
       Resources.findOne({user}, (err, resource) => {
+        console.log('found user in delete: ' + user)
+        console.log('found resource in delete: ' + resource)
         if (err) res.status(422).json({message: 'Error finding resource'})
         else {
           var resourceID = resource._id
@@ -152,6 +184,7 @@ describe('DELETE /resources', () => {
           .set('Accept', 'application/html')
           .expect(200)
           .end( (err, response) => {
+            if (err) res.status(401).json({error: 'wut'})
             expect(response.body.message).to.equal('Resource deleted')
             done()
           })
@@ -163,7 +196,7 @@ describe('DELETE /resources', () => {
 
 describe('DELETE /deleteUser', () => {
   it('should remove a user', (done) => {
-    User.findOne({email: users[0].email}, (err, user) => {
+    User.findOne({email: users[1].email}, (err, user) => {
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {
         api.delete('/deleteUser')

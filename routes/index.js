@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
       // console.log('isMatch: ' + isMatch)
       if (err || !isMatch) return res.status(401).json({error: 'Password no match'})
 
-      res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
+      res.status(200).json({message: 'User logged in', email: user.email, auth_token: user.auth_token})
     })
   })
 })

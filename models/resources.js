@@ -5,6 +5,7 @@ const resourceSchema = new mongoose.Schema({
   url: {type: String, required: true},
   tags: [String],
   site_name: String,
+  summary: String,
   user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 
