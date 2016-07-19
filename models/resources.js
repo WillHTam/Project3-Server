@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const resourceSchema = new mongoose.Schema({
-  title: {type: String, required: true},
+  title: String,
   url: {type: String, required: true},
   tags: [String],
   site_name: String,

@@ -25,6 +25,7 @@ function makeNewResource (req, res) {
   var resource = new Resource(req.body)
   const userEmail = req.get('email')
 
+  console.log(userEmail)
   User.findOne({email: userEmail}, (err, user) => {
     if (err) return res.status(401).json({error: 'Unable to find user'})
     resource.user = user._id
