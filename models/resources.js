@@ -4,6 +4,7 @@ const resourceSchema = new mongoose.Schema({
   title: {type: String, required: true},
   url: {type: String, required: true},
   tags: [String],
+  site_name: String,
   user: {type: mongoose.Schema.ObjectId, ref: 'User'}
 })
 

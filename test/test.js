@@ -14,11 +14,11 @@ users = [
 ]
 
 resources = [
-  {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK']},
-  {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA']},
-  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore']},
-  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK']},
-  {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore']}
+  {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK'], site_name: 'BBC.co.uk'},
+  {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA'], site_name: 'edition.cnn.com'},
+  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], site_name: 'todayonline.com'},
+  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK'], site_name: 'dailymail.co.uk'},
+  {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com'}
 ]
 
 describe('GET /', () => {
