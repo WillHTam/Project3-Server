@@ -51,15 +51,10 @@ router.delete('/deleteUser', (req, res) => {
 
     // user.authenticate(userParams.password, (err, isMatch) => {
     // if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
-      Resource.find({user}, (err, resource) => {
-        if (err || !user) return res.status(401).json({error: 'Error finding resource AND/OR user'})
-        console.log(resource)
-        console.log(user)
-        resource.remove()
-        user.remove()
-        res.status(200).json({message: 'User and Resources deleted'})
-      })
-    })
+    Resource.find({user}).remove().exec()
+    user.remove()
+    res.status(200).json({message: 'User and Resources deleted'})
+  })
  // })
 })
 

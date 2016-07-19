@@ -26,10 +26,8 @@ function seeMyResources (req, res) {
   const authToken = req.get('auth_token')
   // const userParams = new User(req.body)
   User.findOne({email: userEmail}, function (err, user) {
-    console.log('User found: ' + user)
     if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
     Resource.find({user}, function (err, resource) {
-      console.log('Resource found: ' + resource)
       if (err) return res.status(401).json({error: 'Error finding resource'})
       res.status(200).json(resource)
     })

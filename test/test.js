@@ -91,7 +91,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[3])
       .set('Accept', 'application/html')
-      .set('User-email', 'juschanuk@gmail.com')
+      .set('User-email', 'william.tam@gmail.com')
       .expect(201, done)
   })
 
@@ -143,7 +143,7 @@ describe('POST /login', () => {
 })
 
 describe('DELETE /deleteUser', () => {
-  xit('should remove a user', (done) => {
+  it('should remove a user', (done) => {
     User.findOne({email: users[0].email}, (err, user) => {
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {
