@@ -23,25 +23,25 @@ router.post('/register', (req, res) => {
   })
 })
 
+// User LOGIN
 router.post('/login', (req, res) => {
-  const user = new User(req.body)
-  // const userEmail = req.get('email')
-  // const userPassword = req.get('password')
-  console.log(user)
-  User.findOne({email: user.email}, (err, user) => {
+  const userParams = new User(req.body)
+  User.findOne({email: userParams.email}, (err, user) => {
     if (err || !user) return res.status(405).json({error: 'Cannot find user'})
 
     console.log(user)
 
-    user.authenticate(user.password, (err, isMatch) => {
-      // if (err || !isMatch) return res.status(469).json({error: 'Password no match'})
-    
+    user.authenticate(userParams.password, (err, isMatch) => {
+      console.log('Error: ' + err)
+      console.log('isMatch: ' + isMatch)
+      if (err || !isMatch) return res.status(401).json({error: 'Password no match'})
+
       res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
     })
   })
 })
 
-
+// posts !!AND!! user DELETE
 router.delete('/deleteUser', (req, res) => {
   console.log("In delete User")
   const userEmail = req.body.user.email
