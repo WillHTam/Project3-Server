@@ -3,6 +3,7 @@ var router = express.Router()
 var applicationController = require('../controllers/application_controller')
 var resourceController = require('../controllers/resource_controller')
 var User = require('../models/user')
+var Resource = require('../models/resources')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -43,11 +44,16 @@ router.delete('/deleteUser', (req, res) => {
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
 
-   // user.authenticate(userParams.password, (err, isMatch) => {
-   //   if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
-
-      user.remove()
-      res.status(200).json({message: 'User deleted'})
+    // user.authenticate(userParams.password, (err, isMatch) => {
+    // if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
+      Resource.find({user}, (err, resource) => {
+        if (err || !user) return res.status(401).json({error: 'Error finding resource AND/OR user'})
+        console.log(resource)
+        console.log(user)
+        resource.remove()
+        user.remove()
+        res.status(200).json({message: 'User and Resources deleted'})
+      })
     })
  // })
 })
