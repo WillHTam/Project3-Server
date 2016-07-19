@@ -49,8 +49,12 @@ function updateResource (req, res) {
 
 function deleteResource (req, res) {
   const resourceid = req.body.id
-  Resource.findOne({id: resourceid}).remove().exec()
-  res.status(200).json({message: 'Resource deleted'})
+  console.log('id for deleteResource:' + resourceid)
+  Resource.findById(resourceid, (err, resource) => {
+    console.log(resource)
+    if (err) res.status(401).json({error: 'Could not find resource'})
+    else res.status(200).json({message: 'Resource deleted'})
+  })
 }
 
 module.exports = {

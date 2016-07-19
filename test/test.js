@@ -184,7 +184,6 @@ describe('DELETE /resources', () => {
           .set('Accept', 'application/html')
           .expect(200)
           .end( (err, response) => {
-            if (err) res.status(401).json({error: 'wut'})
             expect(response.body.message).to.equal('Resource deleted')
             done()
           })
@@ -195,7 +194,7 @@ describe('DELETE /resources', () => {
 })
 
 describe('DELETE /deleteUser', () => {
-  it('should remove a user', (done) => {
+  xit('should remove a user', (done) => {
     User.findOne({email: users[1].email}, (err, user) => {
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {
