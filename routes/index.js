@@ -23,14 +23,15 @@ router.post('/register', (req, res) => {
   })
 })
 
+/* EDIT user */
+router.put('/user', applicationController.editUser)
+
 // User LOGIN
 router.post('/login', (req, res) => {
   const userParams = new User(req.body)
   User.findOne({email: userParams.email}, (err, user) => {
     if (err || !user) return res.status(405).json({error: 'Cannot find user'})
     user.authenticate(userParams.password, (err, isMatch) => {
-      // console.log('Error: ' + err)
-      // console.log('isMatch: ' + isMatch)
       if (err || !isMatch) return res.status(401).json({error: 'Password no match'})
 
       res.status(200).json({message: 'User logged in', email: user.email, auth_token: user.auth_token})
@@ -55,8 +56,6 @@ router.delete('/deleteUser', (req, res) => {
  // })
 })
 
-// ADDITIONS!!!!!!!!!
-
 router.get('/allresources', resourceController.showAllResources)
 
 // VIEW MY resources
@@ -69,7 +68,7 @@ router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
 // router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
-router.route('/resources/:id').put(resourceController.updateResource)
+router.route('/resources').put(resourceController.updateResource)
 
 // DELETE resource
 router.delete('/resources', resourceController.deleteResource)
