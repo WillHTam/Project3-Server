@@ -22,10 +22,14 @@ function showAllResources (req, res, err) {
 
 function seeMyResources (req, res) {
   // TODO: this.
-  const userParams = new User(req.body)
-  User.findOne({email: userParams.email}, function (err, user) {
+  const userEmail = req.get('user_email')
+  const authToken = req.get('auth_token')
+  // const userParams = new User(req.body)
+  User.findOne({email: userEmail}, function (err, user) {
+    console.log('User found: ' + user)
     if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
-    Resource.find({user}, function(err, resource) {
+    Resource.find({user}, function (err, resource) {
+      console.log('Resource found: ' + resource)
       if (err) return res.status(401).json({error: 'Error finding resource'})
       res.status(200).json(resource)
     })

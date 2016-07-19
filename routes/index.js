@@ -32,8 +32,8 @@ router.post('/login', (req, res) => {
     console.log(user)
 
     user.authenticate(userParams.password, (err, isMatch) => {
-      console.log('Error: ' + err)
-      console.log('isMatch: ' + isMatch)
+      // console.log('Error: ' + err)
+      // console.log('isMatch: ' + isMatch)
       if (err || !isMatch) return res.status(401).json({error: 'Password no match'})
 
       res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
