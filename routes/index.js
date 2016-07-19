@@ -27,10 +27,10 @@ router.post('/login', (req, res) => {
   const userEmail = req.get('email')
   const userPassword = req.get('password')
   User.findOne({email: userEmail}, (err, user) => {
-    if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
+    if (err || !user) return res.status(401).json({error: 'Cannot find user'})
 
     user.authenticate(userPassword, (err, isMatch) => {
-      if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
+      if (err || !isMatch) return res.status(401).json({error: 'Password no match'})
 
       res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
     })
