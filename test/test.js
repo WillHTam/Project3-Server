@@ -112,6 +112,16 @@ describe('GET /allresources', () => {
   })
 })
 
+describe('GET /resources', () => {
+  it('should return a 200 response', (done) => {
+    var user = {email: users[0].email, password: users[0].password }
+    api.get('/resources')
+    .set('Accept', 'application/html')
+    .send({user})
+    .expect(200, done)
+  })
+})
+
 describe('POST /login', () => {
   it('should return a 200 response and auth_token', (done) => {
     var user = {email: users[0].email, password: users[0].password }

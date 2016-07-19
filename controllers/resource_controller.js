@@ -21,11 +21,14 @@ function showAllResources (req, res, err) {
 }
 
 function seeMyResources (req, res) {
-  // This is the only one I'm not sure about. I know we would have to use currentUser but I'm not sure how.
-  User.findById(req.params.currentUser.user_id, function (err, user) {
+  // TODO: this.
+  const userParams = new User(req.body)
+  User.findOne({email: userParams.email}, function (err, user) {
     if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
-    // TODO: filter based on user id
-    res.status(200).json(resources)
+    Resource.find({user}, function(err, resource) {
+      if (err) return res.status(401).json({error: 'Error finding resource'})
+      res.status(200).json(resource)
+    })
   })
 }
 
