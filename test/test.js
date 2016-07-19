@@ -174,8 +174,6 @@ describe('DELETE /resources', () => {
   it('should remove a resource', (done) => {
     User.findOne({email: users[0].email}, (err, user) => {
       Resources.findOne({user}, (err, resource) => {
-        console.log('found user in delete: ' + user)
-        console.log('found resource in delete: ' + resource)
         if (err) res.status(422).json({message: 'Error finding resource'})
         else {
           var resourceID = resource._id
@@ -194,7 +192,7 @@ describe('DELETE /resources', () => {
 })
 
 describe('DELETE /deleteUser', () => {
-  xit('should remove a user', (done) => {
+  it('should remove a user', (done) => {
     User.findOne({email: users[1].email}, (err, user) => {
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {

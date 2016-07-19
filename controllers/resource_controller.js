@@ -49,7 +49,6 @@ function updateResource (req, res) {
 
 function deleteResource (req, res) {
   const resourceid = req.body.id
-  console.log('id for deleteResource:' + resourceid)
   Resource.findById(resourceid).remove().exec()
   res.status(200).json({message: 'Resource deleted'})
 }
