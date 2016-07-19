@@ -114,10 +114,11 @@ describe('GET /allresources', () => {
 
 describe('POST /login', () => {
   it('should return a 200 response and auth_token', (done) => {
-    var user = {email: users[0].email, password: users[0].password }
+    // var user = {email: users[0].email, password: users[0].password }
     api.post('/login')
-    .send({user})
     .set('Accept', 'application/html')
+    .set({email: 'juschanuk@gmail.com'})
+    .set({password: 'accounting'})
     .expect(200)
     .end( (err, response) => {
       expect(response.body.message).to.equal('User logged in')
