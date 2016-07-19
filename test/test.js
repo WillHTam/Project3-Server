@@ -81,7 +81,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[0])
       .set('Accept', 'application/html')
-      .set('user_email', 'juschanuk@gmail.com')
+      .set('email', 'juschanuk@gmail.com')
       .expect(201, done)
   })
 
@@ -89,7 +89,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[1])
       .set('Accept', 'application/html')
-      .set('user_email', 'william.tam@gmail.com')
+      .set('email', 'william.tam@gmail.com')
       .expect(201, done)
   })
 
@@ -97,7 +97,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[2])
       .set('Accept', 'application/html')
-      .set('user_email', 'juschanuk@gmail.com')
+      .set('email', 'juschanuk@gmail.com')
       .expect(201, done)
   })
 
@@ -105,7 +105,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[3])
       .set('Accept', 'application/html')
-      .set('user_email', 'william.tam@gmail.com')
+      .set('email', 'william.tam@gmail.com')
       .expect(201, done)
   })
 
@@ -113,7 +113,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[4])
       .set('Accept', 'application/html')
-      .set('user_email', 'juschanuk@gmail.com')
+      .set('email', 'juschanuk@gmail.com')
       .expect(201, done)
   })
 
@@ -121,7 +121,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[5])
       .set('Accept', 'application/html')
-      .set('user_email', 'angel@angel.com')
+      .set('email', 'angel@angel.com')
       .expect(201, done)
   })
 
@@ -129,7 +129,7 @@ describe('POST /resources', function() {
     api.post('/resources')
       .send(resources[6])
       .set('Accept', 'application/html')
-      .set('user_email', 'angel@angel.com')
+      .set('email', 'angel@angel.com')
       .expect(201, done)
   })
 })
@@ -148,7 +148,7 @@ describe('GET /resources', () => {
       if (err) res.status(401).json({error: 'error'})
       api.get('/resources')
       .set('Accept', 'application/html')
-      .set('user_email', users[0].email)
+      .set('email', users[0].email)
       .set('auth_token', user.auth_token)
       .expect(200, done)
     })

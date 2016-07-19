@@ -9,7 +9,7 @@ function showAllResources (req, res, err) {
 
 function seeMyResources (req, res) {
   // TODO: this.
-  const userEmail = req.get('user_email')
+  const userEmail = req.get('email')
   const authToken = req.get('auth_token')
   // const userParams = new User(req.body)
   User.findOne({email: userEmail}, function (err, user) {
@@ -23,7 +23,7 @@ function seeMyResources (req, res) {
 
 function makeNewResource (req, res) {
   var resource = new Resource(req.body)
-  const userEmail = req.get('user_email')
+  const userEmail = req.get('email')
 
   User.findOne({email: userEmail}, (err, user) => {
     if (err) return res.status(401).json({error: 'Unable to find user'})
