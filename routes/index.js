@@ -24,16 +24,18 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  const userEmail = req.get('email')
-  const userPassword = req.get('password')
-  console.log(userEmail)
-  User.findOne({email: userEmail}, (err, user) => {
-    console.log(user)
+  const user = new User(req.body)
+  // const userEmail = req.get('email')
+  // const userPassword = req.get('password')
+  console.log(user)
+  User.findOne({email: user.email}, (err, user) => {
     if (err || !user) return res.status(405).json({error: 'Cannot find user'})
 
-    user.authenticate(userPassword, (err, isMatch) => {
-      if (err || !isMatch) return res.status(469).json({error: 'Password no match'})
+    console.log(user)
 
+    user.authenticate(user.password, (err, isMatch) => {
+      // if (err || !isMatch) return res.status(469).json({error: 'Password no match'})
+    
       res.status(200).json({message: 'User logged in', auth_token: user.auth_token})
     })
   })
