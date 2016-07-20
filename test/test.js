@@ -165,14 +165,6 @@ describe('POST /resources', function() {
       .set('email', 'angel@angel.com')
       .expect(201, done)
   })
-
-  it('should return a 200 response', (done) => {
-    api.post('/resources')
-      .send(resources[8])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
-  })
 })
 
 describe('GET /allresources', () => {
