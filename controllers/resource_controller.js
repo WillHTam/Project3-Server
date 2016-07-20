@@ -50,7 +50,8 @@ function updateResource (req, res) {
   })
 }
 
-function deleteResource (req, res) {
+function deleteResource (req, res, err) {
+  // if (err) return res.status(401).json({error: 'Could not find resource'})
   const resourceid = req.body.id
   Resource.findById(resourceid).remove().exec()
   res.status(200).json({message: 'Resource deleted'})
