@@ -50,7 +50,7 @@ describe('POST /register', function() {
     .end( (err, response) => {
       expect(response.body.message).to.equal('User created.')
       done()
-      })
+    })
   })
 
   it('should return "User created." message', (done) => {
@@ -61,7 +61,7 @@ describe('POST /register', function() {
     .end( (err, response) => {
       expect(response.body.message).to.equal('User created.')
       done()
-      })
+    })
   })
 
   it('should return "User created." message', (done) => {
@@ -72,106 +72,266 @@ describe('POST /register', function() {
     .end( (err, response) => {
       expect(response.body.message).to.equal('User created.')
       done()
-      })
+    })
   })
 })
 
 describe('POST /resources', function() {
   this.timeout(10000000)
 
-  it('should return a 200 response 1', (done) => {
-    api.post('/resources')
-      .send(resources[0])
-      .set('Accept', 'application/html')
-      .set('email', 'juschanuk@gmail.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 2', function (done) {
-    api.post('/resources')
-      .send(resources[1])
-      .set('Accept', 'application/html')
-      .set('email', 'william.tam@gmail.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 3', (done) => {
-    api.post('/resources')
-      .send(resources[2])
-      .set('Accept', 'application/html')
-      .set('email', 'juschanuk@gmail.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 4', (done) => {
-    api.post('/resources')
-      .send(resources[3])
-      .set('Accept', 'application/html')
-      .set('email', 'william.tam@gmail.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 5', (done) => {
-    api.post('/resources')
-      .send(resources[4])
-      .set('Accept', 'application/html')
-      .set('email', 'juschanuk@gmail.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 6', (done) => {
-    api.post('/resources')
-      .send(resources[5])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response 7', (done) => {
-    api.post('/resources')
-      .send(resources[6])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
-  })
-
-  it('should return a 401 response', (done) => {
-    api.post('/resources')
-      .send(resources[6])
-      .set('Accept', 'application/html')
-      .expect(401, done)
-  })
-
-  it('should return a 401 response', (done) => {
-    api.post('/resources')
-      .send(resources[6])
-      .set('Accept', 'application/html')
-      .set('email', 'blah@blah.com')
-      .expect(401, done)
+  it('should return a 201 response 1', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[0].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[0])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
     })
-
-  it('should return a 200 response 8', (done) => {
-    api.post('/resources')
-      .send(resources[7])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
-    api.post('/resources')
-      .send(resources[8])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
+  it('should return a 201 response 2', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[1].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[1])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
   })
 
-  it('should return a 200 response', (done) => {
-    api.post('/resources')
-      .send(resources[8])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
+  it('should return a 201 response 3', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[0].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[2])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 201 response 4', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[1].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[3])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 201 response 5', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[0].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[4])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 201 response 6', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[2].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[5])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 201 response 7', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[2].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[6])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 401 response 8', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[0].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[6])
+        .set('Accept', 'application/html')
+        .set('auth_token', user[0].auth_token)
+        .expect(401,done)
+      }
+    })
+  })
+
+  it('should return a 401 response 9', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[0].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[6])
+        .set('Accept', 'application/html')
+        .set('email', 'blah@blah.com')
+        .set('auth_token', user[0].auth_token)
+        .expect(401,done)
+      }
+    })
+  })
+
+
+  it('should return a 201 response 10', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[2].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[7])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+
+  it('should return a 201 response 11', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[2].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[8])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
+  })
+  it('should return a 201 response 12', (done) => {
+    //console.log("check user email:" + users[0].email)
+    User.find({email: users[2].email}, (err, user) => {
+      if (err) {
+        res.status(401).json({error: 'User not found'})
+        done()
+      }
+      else {
+        api.post('/resources')
+        .send(resources[8])
+        .set('Accept', 'application/html')
+        .set('email', user[0].email)
+        .set('auth_token', user[0].auth_token)
+        .expect(201)
+        .end( (err, response) => {
+          expect(response.body.message).to.equal('Resource created')
+          done()
+        })
+      }
+    })
   })
 })
 
@@ -207,7 +367,7 @@ describe('POST /login', () => {
       expect(response.body.message).to.equal('User logged in')
       expect(response.body.auth_token).to.exist
       done()
-      })
+    })
   })
 })
 
@@ -223,7 +383,7 @@ describe('DELETE /resources', () => {
           .set('Accept', 'application/html')
           .expect(401)
           .end( (err, response) => {
-            expect(response.body.error).to.equal('User not found (deleteResource)')
+            expect(response.body.error).to.equal('Unauthorised')
             done()
           })
         }
@@ -251,20 +411,20 @@ describe('DELETE /resources', () => {
       })
     })
   })
-
 })
-
+// This test should pass with a 401 response
+// users are not updated because we did not give a valid email and authentication token
 describe('DELETE /deleteUser', () => {
-  it('should remove a user', (done) => {
+  it('should not remove a user', (done) => {
     User.findOne({email: users[1].email}, (err, user) => {
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {
         api.delete('/deleteUser')
         .send({user})
         .set('Accept', 'application/html')
-        .expect(200)
+        .expect(401)
         .end((err, response) => {
-          expect(response.body.message).to.equal('User and Resources deleted')
+          expect(response.body.error).to.equal('Unauthorised')
           done()
         })
       }
@@ -285,9 +445,9 @@ describe('PUT /user', function () {
       .send(user1)
       .expect(401)
       .end((err, response) => {
-        expect(response.body.error).to.equal('User update failed')
+        expect(response.body.error).to.equal('Unauthorised')
         done()
-        })
+      })
     })
   })
 })
@@ -307,7 +467,7 @@ describe('PUT /user', function () {
       .end((err, response) => {
         expect(response.body.message).to.equal('User successfully updated')
         done()
-        })
+      })
     })
   })
 })
@@ -325,7 +485,7 @@ describe('PUT /resources', function () {
         .send(resource1)
         .expect(401)
         .end((err, response) => {
-          expect(response.body.error).to.equal('Resource update failed')
+          expect(response.body.error).to.equal('Unauthorised')
           done()
         })
       })

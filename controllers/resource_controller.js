@@ -31,24 +31,27 @@ function seeMyResources (req, res) {
 }
 
 function makeNewResource (req, res) {
+
   var resource = new Resource(req.body)
   const userEmail = req.get('email')
 
   User.findOne({email: userEmail}, (err, user) => {
-    if (err || !user) return res.status(401).json({error: 'Unable to find user'})
+    if (err || !user) {
+      res.status(401).json({error: 'Unable to find user'})
+    } else {
+      reqInstaparser(req.body.url, function (site_name, title, description, thumbnail) {
+        resource.site_name = site_name
+        resource.title = title
+        resource.description = description
+        resource.thumbnail = thumbnail
+        resource.user = user._id
 
-    reqInstaparser(req.body.url, function (site_name, title, description, thumbnail) {
-      resource.site_name = site_name
-      resource.title = title
-      resource.description = description
-      resource.thumbnail = thumbnail
-      resource.user = user._id
-
-      resource.save((err, resource) => {
-        if (err) return res.status(401).json({error: 'error!'})
-        res.status(201).json({message: 'Resource created', resource})
+        resource.save((err, resource) => {
+          if (err) return res.status(401).json({error: 'error!'})
+          res.status(201).json({message: 'Resource created', resource})
+        })
       })
-    })
+    }
   })
 }
 

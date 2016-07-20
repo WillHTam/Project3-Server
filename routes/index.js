@@ -18,30 +18,31 @@ router.get('/', function (req, res, next) {
 router.post('/register', applicationController.userRegister)
 
 /* EDIT user */
-router.put('/user', applicationController.editUser)
+router.put('/user', applicationController.userLoggedIn, applicationController.editUser)
 
 // User LOGIN
 router.post('/login', applicationController.userLogIn)
 
 // posts !!AND!! user DELETE
-router.delete('/deleteUser', applicationController.deleteUser)
+router.delete('/deleteUser', applicationController.userLoggedIn, applicationController.deleteUser)
+// router.delete('/deleteUser', applicationController.deleteUser)
 
 // GET all resources
 router.get('/allresources', resourceController.showAllResources)
 
 // VIEW the logged in user's resources ONLY
-// router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
-router.get('/resources', resourceController.seeMyResources)
+router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
+// router.get('/resources', resourceController.seeMyResources)
 
 // CREATE resource
-// router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
-router.post('/resources', resourceController.makeNewResource)
+router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
+// router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
-// router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
-router.put('/resources', resourceController.updateResource)
+router.put('/resources', applicationController.userLoggedIn, resourceController.updateResource)
+// router.put('/resources', resourceController.updateResource)
 
 // DELETE resource
-router.delete('/resources', resourceController.deleteResource)
+router.delete('/resources', applicationController.userLoggedIn, resourceController.deleteResource)
 
 module.exports = router
