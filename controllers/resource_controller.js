@@ -35,11 +35,13 @@ function makeNewResource (req, res) {
   const userEmail = req.get('email')
 
   User.findOne({email: userEmail}, (err, user) => {
-    if (err) return res.status(401).json({error: 'Unable to find user'})
+    if (err || !user) return res.status(401).json({error: 'Unable to find user'})
 
-    reqInstaparser(req.body.url, function (site_name, title) {
+    reqInstaparser(req.body.url, function (site_name, title, description, thumbnail) {
       resource.site_name = site_name
       resource.title = title
+      resource.description = description
+      resource.thumbnail = thumbnail
       resource.user = user._id
 
       resource.save((err, resource) => {
@@ -55,13 +57,12 @@ var client = request.createClient('https://www.instaparser.com/')
 function reqInstaparser (url, cb) {
   client.get('api/1/article' + '?api_key=' + apiKey + '&url=' + url, function (err, res, body) {
   if (!err && res.statusCode == 200) {
-      cb(body.site_name, body.title)
+      cb(body.site_name, body.title, body.description, body.thumbnail)
     }
   })
 }
 
 function updateResource (req, res) {
-  console.log('updateReosource req.body.title' + req.body.title)
   Resource.findById(req.body.id, (err, resource) => {
     if (err) return res.status(401).json({error: 'Cannot find resource'})
     resource.title = req.body.title
@@ -78,9 +79,22 @@ function updateResource (req, res) {
 }
 
 function deleteResource (req, res, err) {
-  const resourceid = req.body.id
-  Resource.findById(resourceid).remove().exec()
-  res.status(200).json({message: 'Resource deleted'})
+  const resourceid = req.get('id')
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+
+  User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'User not found (deleteResource)'})
+    else {
+      Resource.findById(resourceid, (err, resource) => {
+        if (err) return res.status(401).json({error: "Resource not found"})
+        else {
+          resource.remove()
+          res.status(200).json({message: 'Resource deleted'})
+        }
+      })
+    }
+  })
 }
 
 module.exports = {
