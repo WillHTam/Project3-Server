@@ -85,7 +85,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', function(done) {
+  it('should return a 200 response', function (done) {
     api.post('/resources')
       .send(resources[1])
       .set('Accept', 'application/html')
@@ -157,7 +157,7 @@ describe('GET /resources', () => {
 
 describe('POST /login', () => {
   it('should return a 200 response and auth_token', (done) => {
-    var user = {email: users[0].email, password: users[0].password }
+    var user = {email: users[0].email, password: users[0].password}
     api.post('/login')
     .set('Accept', 'application/html')
     .send(user)
@@ -200,7 +200,7 @@ describe('DELETE /deleteUser', () => {
         .send({user})
         .set('Accept', 'application/html')
         .expect(200)
-        .end( (err, response) => {
+        .end((err, response) => {
           expect(response.body.message).to.equal('User and Resources deleted')
           done()
         })
@@ -209,7 +209,7 @@ describe('DELETE /deleteUser', () => {
   })
 })
 
-describe('PUT /user', function() {
+describe('PUT /user', function () {
   it('should edit the user', (done) => {
     User.findOne({email: users[0].email}, (err, user) => {
       if (err) res.status(401).json({error: 'error'})
@@ -220,7 +220,7 @@ describe('PUT /user', function() {
       .set('auth_token', user.auth_token)
       .send(user1)
       .expect(200)
-      .end( (err, response) => {
+      .end((err, response) => {
         expect(response.body.message).to.equal('User successfully updated')
         done()
         })
@@ -228,17 +228,16 @@ describe('PUT /user', function() {
   })
 })
 
-describe('PUT /resources', function() {
+describe('PUT /resources', function () {
   it('should edit the resource', (done) => {
     Resources.findOne({title: resources[2].title}, (err, resource) => {
-      console.log('resource found in test:' + resource)
       if (err) res.status(401).json({error: 'error'})
       var resource1 = {id: resource._id, title: 'Replace', url: 'http://www.test.com', site_name: 'test.com', summary: 'EDITED ENTRY'}
       api.put('/resources')
       .set('Accept', 'application/html')
       .send(resource1)
       .expect(200)
-      .end( (err, response) => {
+      .end((err, response) => {
         expect(response.body.message).to.equal('Resource updated')
         done()
       })
