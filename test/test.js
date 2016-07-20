@@ -40,7 +40,7 @@ describe('GET /', () => {
 
 // describe('POST /register', function() {
 //   this.timeout(10000)
-//
+
 //   it('should return "User created." message', (done) => {
 //     api.post('/register')
 //     .set('Accept', 'application/html')
@@ -51,7 +51,7 @@ describe('GET /', () => {
 //       done()
 //       })
 //   })
-//
+
 //   it('should return "User created." message', (done) => {
 //     api.post('/register')
 //     .set('Accept', 'application/html')
@@ -62,7 +62,7 @@ describe('GET /', () => {
 //       done()
 //       })
 //   })
-//
+
 //   it('should return "User created." message', (done) => {
 //     api.post('/register')
 //     .set('Accept', 'application/html')
@@ -74,10 +74,10 @@ describe('GET /', () => {
 //       })
 //   })
 // })
-//
+
 // describe('POST /resources', function() {
 //   this.timeout(10000000)
-//
+
 //   it('should return a 200 response 1', (done) => {
 //     api.post('/resources')
 //       .send(resources[0])
@@ -85,7 +85,7 @@ describe('GET /', () => {
 //       .set('email', 'juschanuk@gmail.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 2', function (done) {
 //     api.post('/resources')
 //       .send(resources[1])
@@ -93,7 +93,7 @@ describe('GET /', () => {
 //       .set('email', 'william.tam@gmail.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 3', (done) => {
 //     api.post('/resources')
 //       .send(resources[2])
@@ -101,7 +101,7 @@ describe('GET /', () => {
 //       .set('email', 'juschanuk@gmail.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 4', (done) => {
 //     api.post('/resources')
 //       .send(resources[3])
@@ -109,7 +109,7 @@ describe('GET /', () => {
 //       .set('email', 'william.tam@gmail.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 5', (done) => {
 //     api.post('/resources')
 //       .send(resources[4])
@@ -117,7 +117,7 @@ describe('GET /', () => {
 //       .set('email', 'juschanuk@gmail.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 6', (done) => {
 //     api.post('/resources')
 //       .send(resources[5])
@@ -125,14 +125,14 @@ describe('GET /', () => {
 //       .set('email', 'angel@angel.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 401 response', (done) => {
 //     api.post('/resources')
 //     .send(resources[6])
 //     .set('Accept', 'application/html')
 //     .expect(401, done)
 //   })
-//
+
 //   it('should return a 401 response', (done) => {
 //     api.post('/resources')
 //     .send(resources[6])
@@ -140,7 +140,7 @@ describe('GET /', () => {
 //     .set('email', 'blah@blah.com')
 //     .expect(401, done)
 //   })
-//
+
 //   it('should return a 200 response 7', (done) => {
 //     api.post('/resources')
 //       .send(resources[6])
@@ -148,7 +148,7 @@ describe('GET /', () => {
 //       .set('email', 'angel@angel.com')
 //       .expect(201, done)
 //   })
-//
+
 //   it('should return a 200 response 8', (done) => {
 //     api.post('/resources')
 //       .send(resources[7])
@@ -157,7 +157,7 @@ describe('GET /', () => {
 //       .expect(201, done)
 //   })
 // })
-//
+
 // describe('GET /allresources', () => {
 //   it('should return a 200 response', (done) => {
 //     api.get('/allresources')
@@ -165,7 +165,7 @@ describe('GET /', () => {
 //     .expect(200, done)
 //   })
 // })
-//
+
 // describe('GET /resources', () => {
 //   it('should return a 200 response', (done) => {
 //     User.findOne({email: users[0].email}, (err, user) => {
@@ -178,7 +178,7 @@ describe('GET /', () => {
 //     })
 //   })
 // })
-//
+
 // describe('POST /login', () => {
 //   it('should return a 200 response and auth_token', (done) => {
 //     var user = {email: users[0].email, password: users[0].password}
@@ -193,17 +193,17 @@ describe('GET /', () => {
 //       })
 //   })
 // })
-//
+
 // describe('DELETE /resources', () => {
-//   it('should remove a resource', (done) => {
+//   it('should not remove a resource due to missing email/auth_token', (done) => {
 //     User.findOne({email: users[0].email}, (err, user) => {
 //       Resources.findOne({user}, (err, resource) => {
 //         if (err) res.status(422).json({message: 'Error finding resource'})
 //         else {
 //           var resourceID = resource._id
 //           api.delete('/resources')
-//           .send({id: resourceID})
 //           .set('Accept', 'application/html')
+//           .set('id', resourceID)
 //           .expect(401)
 //           .end( (err, response) => {
 //             expect(response.body.error).to.equal('User not found (deleteResource)')
@@ -213,7 +213,7 @@ describe('GET /', () => {
 //       })
 //     })
 //   })
-//
+
 //   it('should remove a resource', (done) => {
 //     User.findOne({email: users[0].email}, (err, user) => {
 //       Resources.findOne({user}, (err, resource) => {
@@ -221,10 +221,10 @@ describe('GET /', () => {
 //         else {
 //           var resourceID = resource._id
 //           api.delete('/resources')
-//           .send({id: resourceID})
 //           .set('Accept', 'application/html')
 //           .set('email', users[0].email)
 //           .set('auth_token', user.auth_token)
+//           .set('id', resourceID)
 //           .expect(200)
 //           .end( (err, response) => {
 //             expect(response.body.message).to.equal('Resource deleted')
@@ -234,9 +234,9 @@ describe('GET /', () => {
 //       })
 //     })
 //   })
-//
+
 // })
-//
+
 // describe('DELETE /deleteUser', () => {
 //   it('should remove a user', (done) => {
 //     User.findOne({email: users[1].email}, (err, user) => {
@@ -254,7 +254,7 @@ describe('GET /', () => {
 //     })
 //   })
 // })
-//
+
 // describe('PUT /user', function () {
 //   it('should edit the user', (done) => {
 //     User.findOne({email: users[0].email}, (err, user) => {
@@ -273,7 +273,7 @@ describe('GET /', () => {
 //     })
 //   })
 // })
-//
+
 // describe('PUT /resources', function () {
 //   it('should edit the resource', (done) => {
 //     User.findOne({email: users[2].email}, (err, user) => {

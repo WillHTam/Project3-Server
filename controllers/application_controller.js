@@ -49,9 +49,11 @@ function editUser(req, res, next) {
       user.email = req.body.email
       user.password = req.body.password
       user.save( function(err) {
-        if (err) res.status(400).json({error: 'cannot save user'})
-        res.status(200).json({message: 'User successfully updated', auth_token: user.auth_token, email: user.email})
-        next()
+        if (err) res.status(400).json({error: 'Cannot save user'})
+        else {
+          res.status(200).json({message: 'User successfully updated', auth_token: user.auth_token, email: user.email})
+          next()
+        }
       })
     }
   })
