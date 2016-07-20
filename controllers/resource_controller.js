@@ -79,13 +79,21 @@ function updateResource (req, res) {
 }
 
 function deleteResource (req, res, err) {
-  const resourceid = req.body.id
+  const resourceid = req.get('id')
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
+
   User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'User not found (deleteResource)'})
-    Resource.findById(resourceid).remove().exec()
-    res.status(200).json({message: 'Resource deleted'})
+    else {
+      Resource.findById(resourceid, (err, resource) => {
+        if (err) return res.status(401).json({error: "Resource not found"})
+        else {
+          resource.remove()
+          res.status(200).json({message: 'Resource deleted'})
+        }
+      })
+    }
   })
 }
 
