@@ -37,7 +37,7 @@ describe('GET /', () => {
     .expect(200, done)
   })
 })
-
+//
 // describe('POST /register', function() {
 //   this.timeout(10000)
 
@@ -125,7 +125,7 @@ describe('GET /', () => {
 //       .set('email', 'angel@angel.com')
 //       .expect(201, done)
 //   })
-
+//
 //   it('should return a 401 response', (done) => {
 //     api.post('/resources')
 //     .send(resources[6])
@@ -140,13 +140,28 @@ describe('GET /', () => {
 //     .set('email', 'blah@blah.com')
 //     .expect(401, done)
 //   })
-
+//
 //   it('should return a 200 response 7', (done) => {
 //     api.post('/resources')
 //       .send(resources[6])
 //       .set('Accept', 'application/html')
 //       .set('email', 'angel@angel.com')
 //       .expect(201, done)
+//
+//       it('should return a 401 response', (done) => {
+//         api.post('/resources')
+//         .send(resources[6])
+//         .set('Accept', 'application/html')
+//         .expect(401, done)
+//       })
+//
+//       it('should return a 401 response', (done) => {
+//         api.post('/resources')
+//         .send(resources[6])
+//         .set('Accept', 'application/html')
+//         .set('email', 'blah@blah.com')
+//         .expect(401, done)
+//       })
 //   })
 
 //   it('should return a 200 response 8', (done) => {
@@ -279,7 +294,7 @@ describe('GET /', () => {
 //     User.findOne({email: users[2].email}, (err, user) => {
 //       Resources.findOne({user}, (err, resource) => {
 //         if (err) res.status(401).json({error: 'error'})
-//         var resource1 = {id: resource._id, title: 'Replacement Title', url: 'http://edition.cnn.com/2016/07/18/asia/north-korea-missiles/index.html', site_name: 'test.com', summary: 'EDitED ENTRY'}
+//         var resource1 = {id: resource._id, title: 'The Strange Blissfulness of Storms', url: 'http://nautil.us/issue/37/currents/the-strange-blissfulness-of-storms?as-seen-on-www.curat.io', site_name: 'nautil.us', summary: 'EDITED ENTRY', thumbnail: 'http://static.nautil.us/9331_bd9d03102a312711b0a71ecb44581d9d.jpg'}
 //         api.put('/resources')
 //         .set('Accept', 'application/html')
 //         .send(resource1)
