@@ -63,17 +63,22 @@ function reqInstaparser (url, cb) {
 }
 
 function updateResource (req, res) {
-  Resource.findById(req.body.id, (err, resource) => {
-    if (err) return res.status(401).json({error: 'Cannot find resource'})
-    resource.title = req.body.title
-    resource.url = req.body.url
-    resource.tags = req.body.tags
-    resource.site_name = req.body.site_name
-    resource.summary = req.body.summary
-    resource.thumbnail = req.body.thumbnail
-    resource.save((err) => {
-      if (err) return res.status(401).json({error: err})
-      res.status(200).json({message: 'Resource updated', resource})
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+  User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'Resource update failed'})
+    Resource.findById(req.body.id, (err, resource) => {
+      if (err) return res.status(401).json({error: 'Cannot find resource'})
+      resource.title = req.body.title
+      resource.url = req.body.url
+      resource.tags = req.body.tags
+      resource.site_name = req.body.site_name
+      resource.summary = req.body.summary
+      resource.thumbnail = req.body.thumbnail
+      resource.save((err) => {
+        if (err) return res.status(401).json({error: err})
+        res.status(200).json({message: 'Resource updated', resource})
+      })
     })
   })
 }

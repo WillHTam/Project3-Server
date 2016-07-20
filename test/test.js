@@ -290,7 +290,8 @@ describe('PUT /user', function () {
     })
   })
 })
-
+// This test should pass with a 401 response
+// resources are not updated because we did not give a valid email and authentication token
 describe('PUT /resources', function () {
   it('should edit the resource', (done) => {
     User.findOne({email: users[2].email}, (err, user) => {
@@ -300,9 +301,9 @@ describe('PUT /resources', function () {
         api.put('/resources')
         .set('Accept', 'application/html')
         .send(resource1)
-        .expect(200)
+        .expect(401)
         .end((err, response) => {
-          expect(response.body.message).to.equal('Resource updated')
+          expect(response.body.error).to.equal('Resource update failed')
           done()
         })
       })
