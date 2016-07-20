@@ -41,13 +41,13 @@ function userFind (req, res, next) {
 }
 
 function editUser (req, res, next) {
-  console.log(req.get('auth_token'))
-  if (req.get('auth_token') === undefined) res.status(401).json({error: 'User update failed'})
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+  if (authToken === undefined || userEmail === undefined) res.status(401).json({error: 'User update failed'})
     else {
-    User.find({auth_token: req.get('auth_token')}, (err, user) => {
+    User.findOne({auth_token: authToken}, (err, user) => {
       if (err) res.status(401).json({error: 'Cannot find user'})
         else {
-        console.log(req.body)
         user.first_name = req.body.first_name
         user.last_name = req.body.last_name
         user.email = req.body.email

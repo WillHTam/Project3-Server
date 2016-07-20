@@ -274,7 +274,7 @@ describe('DELETE /deleteUser', () => {
 // This test should pass with a 401 response
 // users are not updated because we did not give a valid email and authentication token
 describe('PUT /user', function () {
-  it('should edit the user', (done) => {
+  it('should not edit the user', (done) => {
     User.findOne({email: users[0].email}, (err, user) => {
       if (err) res.status(401).json({error: 'error'})
       var user1 = {first_name: 'Brian', last_name: 'Lopez', email: 'blopez@gmail.com', password: 'mexico'}
@@ -291,6 +291,27 @@ describe('PUT /user', function () {
     })
   })
 })
+// This test should pass with a 200 response
+// because we have supplied valid email and authentication
+describe('PUT /user', function () {
+  it('should edit the user', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      if (err) res.status(401).json({error: 'error'})
+      var user1 = {first_name: 'Brian', last_name: 'Lopez', email: 'blopez@gmail.com', password: 'mexico'}
+      api.put('/user')
+      .set('Accept', 'application/html')
+      .set('email', user.email)
+      .set('auth_token', user.auth_token)
+      .send(user1)
+      .expect(200)
+      .end((err, response) => {
+        expect(response.body.message).to.equal('User successfully updated')
+        done()
+        })
+    })
+  })
+})
+
 // This test should pass with a 401 response
 // resources are not updated because we did not give a valid email and authentication token
 describe('PUT /resources', function () {
@@ -311,6 +332,7 @@ describe('PUT /resources', function () {
     })
   })
 })
+
 
 // This test should pass with a 200 response
 // because we have supplied valid email and authentication
