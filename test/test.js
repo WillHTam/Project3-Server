@@ -132,6 +132,13 @@ describe('POST /resources', function() {
       .set('email', 'angel@angel.com')
       .expect(201, done)
   })
+
+  it('should return a 401 response', (done) => {
+    api.post('/resources')
+      .send(resources[6])
+      .set('Accept', 'application/html')
+      .expect(401, done)
+  })
 })
 
 describe('GET /allresources', () => {
