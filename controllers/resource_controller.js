@@ -99,6 +99,5 @@ module.exports = {
   seeMyResources: seeMyResources,
   makeNewResource: makeNewResource,
   updateResource: updateResource,
-  deleteResource: deleteResource,
-  reqInstaparser: reqInstaparser
+  deleteResource: deleteResource
 }
