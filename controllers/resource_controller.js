@@ -53,8 +53,13 @@ function updateResource (req, res) {
 function deleteResource (req, res, err) {
   // if (err) return res.status(401).json({error: 'Could not find resource'})
   const resourceid = req.body.id
-  Resource.findById(resourceid).remove().exec()
-  res.status(200).json({message: 'Resource deleted'})
+  const userEmail = req.get('email')
+  const authToken = req.get('auth_token')
+  User.findOne({email: userEmail, auth_token: authToken}, (err, user) => {
+    if (err || !user) return res.status(401).json({error: 'User not found (deleteResource)'})
+    Resource.findById(resourceid).remove().exec()
+    res.status(200).json({message: 'Resource deleted'})
+  })
 }
 
 module.exports = {
