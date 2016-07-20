@@ -17,22 +17,14 @@ users = [
 resources = [
   {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK'], site_name: 'BBC.co.uk', summary: 'Summary for the first article'},
   {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA'], site_name: 'edition.cnn.com', summary: 'Summary for the second article'},
-  {title: 'Title 3', url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], site_name: 'todayonline.com', summary: 'Summary for the third article'},
+  {url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], summary: 'Summary for the third article'},
   {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK'], site_name: 'dailymail.co.uk', summary: 'Summary for the fourth article'},
   {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the fifth article'},
   {title: 'Title 6', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SIXTH article'},
-  {title: 'Title 7', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SEVENTH article'}
+  {url: 'http://edition.cnn.com/2016/07/19/weather/hottest-june-record-world/index.html'},
+  {url: 'http://nautil.us/issue/37/currents/the-strange-blissfulness-of-storms?as-seen-on-www.curat.io'},
+  {url: 'https://backchannel.com/inside-the-obama-tech-surge-as-it-hacks-the-pentagon-and-va-8b439bc33ed1'}
 ]
-
-describe('GET /instaparser', function () {
-  this.timeout(100000)
-
-  it('should return a 200 response', (done) => {
-    api.get('/instaparser')
-    .set('Accept', 'application/html')
-    .expect(200, done)
-  })
-})
 
 describe('GET /', () => {
   before ((done) => {
@@ -85,9 +77,9 @@ describe('POST /register', function() {
 })
 
 describe('POST /resources', function() {
-  this.timeout(10000)
+  this.timeout(100000)
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 1', (done) => {
     api.post('/resources')
       .send(resources[0])
       .set('Accept', 'application/html')
@@ -95,7 +87,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', function (done) {
+  it('should return a 200 response 2', function (done) {
     api.post('/resources')
       .send(resources[1])
       .set('Accept', 'application/html')
@@ -103,7 +95,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 3', (done) => {
     api.post('/resources')
       .send(resources[2])
       .set('Accept', 'application/html')
@@ -111,7 +103,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 4', (done) => {
     api.post('/resources')
       .send(resources[3])
       .set('Accept', 'application/html')
@@ -119,7 +111,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 5', (done) => {
     api.post('/resources')
       .send(resources[4])
       .set('Accept', 'application/html')
@@ -127,7 +119,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 6', (done) => {
     api.post('/resources')
       .send(resources[5])
       .set('Accept', 'application/html')
@@ -135,9 +127,33 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 200 response', (done) => {
+  it('should return a 200 response 7', (done) => {
     api.post('/resources')
       .send(resources[6])
+      .set('Accept', 'application/html')
+      .set('email', 'angel@angel.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response 8', (done) => {
+    api.post('/resources')
+      .send(resources[7])
+      .set('Accept', 'application/html')
+      .set('email', 'angel@angel.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+      .send(resources[8])
+      .set('Accept', 'application/html')
+      .set('email', 'angel@angel.com')
+      .expect(201, done)
+  })
+
+  it('should return a 200 response', (done) => {
+    api.post('/resources')
+      .send(resources[8])
       .set('Accept', 'application/html')
       .set('email', 'angel@angel.com')
       .expect(201, done)
@@ -240,16 +256,20 @@ describe('PUT /user', function () {
 
 describe('PUT /resources', function () {
   it('should edit the resource', (done) => {
-    Resources.findOne({title: resources[2].title}, (err, resource) => {
-      if (err) res.status(401).json({error: 'error'})
-      var resource1 = {id: resource._id, title: 'Replace', url: 'http://www.test.com', site_name: 'test.com', summary: 'EDITED ENTRY'}
-      api.put('/resources')
-      .set('Accept', 'application/html')
-      .send(resource1)
-      .expect(200)
-      .end((err, response) => {
-        expect(response.body.message).to.equal('Resource updated')
-        done()
+    console.log(resources[5].title)
+    User.findOne({email: users[2].email}, (err, user) => {
+      Resources.findOne({user}, (err, resource) => {
+        if (err) res.status(401).json({error: 'error'})
+        console.log('resource: ' + resource)
+        var resource1 = {id: resource._id, title: 'Replacement Title', url: 'http://edition.cnn.com/2016/07/18/asia/north-korea-missiles/index.html', site_name: 'test.com', summary: 'EDITED ENTRY'}
+        api.put('/resources')
+        .set('Accept', 'application/html')
+        .send(resource1)
+        .expect(200)
+        .end((err, response) => {
+          expect(response.body.message).to.equal('Resource updated')
+          done()
+        })
       })
     })
   })
