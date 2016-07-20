@@ -293,7 +293,7 @@ describe('PUT /user', function () {
 // This test should pass with a 401 response
 // resources are not updated because we did not give a valid email and authentication token
 describe('PUT /resources', function () {
-  it('should edit the resource', (done) => {
+  it('should not edit the resource - no email or authentication', (done) => {
     User.findOne({email: users[2].email}, (err, user) => {
       Resources.findOne({user}, (err, resource) => {
         if (err) res.status(401).json({error: 'error'})
@@ -304,6 +304,29 @@ describe('PUT /resources', function () {
         .expect(401)
         .end((err, response) => {
           expect(response.body.error).to.equal('Resource update failed')
+          done()
+        })
+      })
+    })
+  })
+})
+
+// This test should pass with a 200 response
+// because we have supplied valid email and authentication
+describe('PUT /resources', function () {
+  it('should edit the resource', (done) => {
+    User.findOne({email: users[2].email}, (err, user) => {
+      Resources.findOne({user}, (err, resource) => {
+        if (err) res.status(401).json({error: 'error'})
+        var resource1 = {id: resource._id, title: 'Replacement Title', url: 'http://edition.cnn.com/2016/07/18/asia/north-korea-missiles/index.html', site_name: 'test.com', summary: 'EDITED ENTRY'}
+        api.put('/resources')
+        .set('Accept', 'application/html')
+        .set('email', user.email)
+        .set('auth_token', user.auth_token)
+        .send(resource1)
+        .expect(200)
+        .end((err, response) => {
+          expect(response.body.message).to.equal('Resource updated')
           done()
         })
       })
