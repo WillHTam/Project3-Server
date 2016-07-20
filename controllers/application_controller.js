@@ -20,7 +20,6 @@ function userFind (req, res, next) {
 }
 
 function editUser(req, res, next) {
-  console.log('I AM ACTIVATED')
   User.findOne({auth_token: req.get('auth_token')}, (err , user) => {
     if (err) res.status(401).json({error: 'Cannot find user'})
     else {

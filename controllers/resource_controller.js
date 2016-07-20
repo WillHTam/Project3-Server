@@ -38,7 +38,7 @@ function makeNewResource (req, res) {
 function updateResource (req, res) {
   Resource.findById(req.body.id, (err, resource) => {
     if (err) return res.status(401).json({error: 'Cannot find resource'})
-    resource.title = req.body.title
+    resource.title = req.body.title || ''
     resource.url = req.body.url
     resource.tags = req.body.tags
     resource.site_name = req.body.site_name

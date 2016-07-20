@@ -227,3 +227,21 @@ describe('PUT /user', function() {
     })
   })
 })
+
+describe('PUT /resources', function() {
+  it('should edit the resource', (done) => {
+    Resources.findOne({title: resources[2].title}, (err, resource) => {
+      console.log('resource found in test:' + resource)
+      if (err) res.status(401).json({error: 'error'})
+      var resource1 = {id: resource._id, title: 'Replace', url: 'http://www.test.com', site_name: 'test.com', summary: 'EDITED ENTRY'}
+      api.put('/resources')
+      .set('Accept', 'application/html')
+      .send(resource1)
+      .expect(200)
+      .end( (err, response) => {
+        expect(response.body.message).to.equal('Resource updated')
+        done()
+      })
+    })
+  })
+})

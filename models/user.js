@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 const uuid = require('uuid')
 
 const userSchema = new mongoose.Schema({
-  id: Number,
   first_name: String,
   last_name: String,
   email: {type: String, unique: true, required: true},
