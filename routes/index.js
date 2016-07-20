@@ -44,4 +44,7 @@ router.route('/resources').put(resourceController.updateResource)
 // DELETE resource
 router.delete('/resources', resourceController.deleteResource)
 
+// instaparser
+router.get('/instaparser', resourceController.reqInstaparser)
+
 module.exports = router

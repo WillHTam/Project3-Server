@@ -24,6 +24,16 @@ resources = [
   {title: 'Title 7', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SEVENTH article'}
 ]
 
+describe('GET /instaparser', function () {
+  this.timeout(100000)
+
+  it('should return a 200 response', (done) => {
+    api.get('/instaparser')
+    .set('Accept', 'application/html')
+    .expect(200, done)
+  })
+})
+
 describe('GET /', () => {
   before ((done) => {
     User.find().remove((err) => console.log('delete all users'))

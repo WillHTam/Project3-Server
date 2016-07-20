@@ -1,6 +1,21 @@
 const Resource = require('../models/resources')
 const User = require('../models/user')
 
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+
+var request = require('request-json')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+var apiKey = 'e4f6f26d24b04759ae5b55ebe5e00394'
+var url = 'http://www.bbc.com/future/story/20160719-meet-japans-kumamon-the-bear-who-earns-billions'
+var instaparserData = {
+  site_name: '',
+  title: ''
+}
+
 function showAllResources (req, res, err) {
   Resource.find({}, function (err, resources) {
     res.status(200).json(resources)
@@ -8,7 +23,6 @@ function showAllResources (req, res, err) {
 }
 
 function seeMyResources (req, res) {
-  // TODO: this.
   const userEmail = req.get('email')
   const authToken = req.get('auth_token')
   // const userParams = new User(req.body)
@@ -57,10 +71,22 @@ function deleteResource (req, res, err) {
   res.status(200).json({message: 'Resource deleted'})
 }
 
+var client = request.createClient('https://www.instaparser.com/')
+
+function reqInstaparser (url) {
+  client.get('api/1/article' + '?api_key=' + apiKey + '&url=' + url, function (err, res, body) {
+  if (!err && res.statusCode == 200) {
+      instaparserData.site_name = body.site_name
+      instaparserData.title = body.title
+    }
+  })
+}
+
 module.exports = {
   showAllResources: showAllResources,
   seeMyResources: seeMyResources,
   makeNewResource: makeNewResource,
   updateResource: updateResource,
-  deleteResource: deleteResource
+  deleteResource: deleteResource,
+  reqInstaparser: reqInstaparser
 }
