@@ -132,6 +132,21 @@ describe('POST /resources', function() {
       .set('email', 'angel@angel.com')
       .expect(201, done)
   })
+
+  it('should return a 401 response', (done) => {
+    api.post('/resources')
+      .send(resources[6])
+      .set('Accept', 'application/html')
+      .expect(401, done)
+  })
+
+  it('should return a 401 response', (done) => {
+    api.post('/resources')
+      .send(resources[6])
+      .set('Accept', 'application/html')
+      .set('email', 'blah@blah.com')
+      .expect(401, done)
+  })
 })
 
 describe('GET /allresources', () => {
@@ -180,6 +195,27 @@ describe('DELETE /resources', () => {
           api.delete('/resources')
           .send({id: resourceID})
           .set('Accept', 'application/html')
+          .expect(401)
+          .end( (err, response) => {
+            expect(response.body.error).to.equal('User not found (deleteResource)')
+            done()
+          })
+        }
+      })
+    })
+  })
+
+  it('should remove a resource', (done) => {
+    User.findOne({email: users[0].email}, (err, user) => {
+      Resources.findOne({user}, (err, resource) => {
+        if (err) res.status(422).json({message: 'Error finding resource'})
+        else {
+          var resourceID = resource._id
+          api.delete('/resources')
+          .send({id: resourceID})
+          .set('Accept', 'application/html')
+          .set('email', users[0].email)
+          .set('auth_token', user.auth_token)
           .expect(200)
           .end( (err, response) => {
             expect(response.body.message).to.equal('Resource deleted')
@@ -189,6 +225,7 @@ describe('DELETE /resources', () => {
       })
     })
   })
+
 })
 
 describe('DELETE /deleteUser', () => {

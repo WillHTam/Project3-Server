@@ -7,7 +7,7 @@ const resourceSchema = new mongoose.Schema({
   site_name: String,
   summary: String,
   thumbnail: String,
-  user: {type: mongoose.Schema.ObjectId, ref: 'User'}
+  user: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'}
 })
 
 const Resource = mongoose.model('Resource', resourceSchema)
