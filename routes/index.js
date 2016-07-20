@@ -39,7 +39,7 @@ router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
 // router.route('resources/:id').put(applicationController.userLoggedIn, resourceController.updateResource)
-router.route('/resources').put(resourceController.updateResource)
+router.put('/resources', resourceController.updateResource)
 
 // DELETE resource
 router.delete('/resources', resourceController.deleteResource)
