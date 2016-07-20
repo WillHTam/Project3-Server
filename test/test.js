@@ -77,7 +77,7 @@ describe('POST /register', function() {
 })
 
 describe('POST /resources', function() {
-  this.timeout(100000)
+  this.timeout(10000000)
 
   it('should return a 200 response 1', (done) => {
     api.post('/resources')
@@ -293,11 +293,9 @@ describe('PUT /user', function () {
 
 describe('PUT /resources', function () {
   it('should edit the resource', (done) => {
-    console.log(resources[5].title)
     User.findOne({email: users[2].email}, (err, user) => {
       Resources.findOne({user}, (err, resource) => {
         if (err) res.status(401).json({error: 'error'})
-        console.log('resource: ' + resource)
         var resource1 = {id: resource._id, title: 'Replacement Title', url: 'http://edition.cnn.com/2016/07/18/asia/north-korea-missiles/index.html', site_name: 'test.com', summary: 'EDITED ENTRY'}
         api.put('/resources')
         .set('Accept', 'application/html')

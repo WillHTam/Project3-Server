@@ -37,9 +37,11 @@ function makeNewResource (req, res) {
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Unable to find user'})
 
-    reqInstaparser(req.body.url, function (site_name, title) {
+    reqInstaparser(req.body.url, function (site_name, title, description, thumbnail) {
       resource.site_name = site_name
       resource.title = title
+      resource.description = description
+      resource.thumbnail = thumbnail
       resource.user = user._id
 
       resource.save((err, resource) => {
@@ -55,13 +57,12 @@ var client = request.createClient('https://www.instaparser.com/')
 function reqInstaparser (url, cb) {
   client.get('api/1/article' + '?api_key=' + apiKey + '&url=' + url, function (err, res, body) {
   if (!err && res.statusCode == 200) {
-      cb(body.site_name, body.title)
+      cb(body.site_name, body.title, body.description, body.thumbnail)
     }
   })
 }
 
 function updateResource (req, res) {
-  console.log('updateReosource req.body.title' + req.body.title)
   Resource.findById(req.body.id, (err, resource) => {
     if (err) return res.status(401).json({error: 'Cannot find resource'})
     resource.title = req.body.title
