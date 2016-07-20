@@ -78,7 +78,7 @@ describe('POST /register', function() {
 describe('POST /resources', function() {
   this.timeout(10000000)
 
-  xit('should return a 200 response 1', (done) => {
+  it('should return a 200 response 1', (done) => {
     api.post('/resources')
       .send(resources[0])
       .set('Accept', 'application/html')
@@ -86,7 +86,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 2', function (done) {
+  it('should return a 200 response 2', function (done) {
     api.post('/resources')
       .send(resources[1])
       .set('Accept', 'application/html')
@@ -94,7 +94,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 3', (done) => {
+  it('should return a 200 response 3', (done) => {
     api.post('/resources')
       .send(resources[2])
       .set('Accept', 'application/html')
@@ -102,7 +102,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 4', (done) => {
+  it('should return a 200 response 4', (done) => {
     api.post('/resources')
       .send(resources[3])
       .set('Accept', 'application/html')
@@ -110,7 +110,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 5', (done) => {
+  it('should return a 200 response 5', (done) => {
     api.post('/resources')
       .send(resources[4])
       .set('Accept', 'application/html')
@@ -118,7 +118,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 6', (done) => {
+  it('should return a 200 response 6', (done) => {
     api.post('/resources')
       .send(resources[5])
       .set('Accept', 'application/html')
@@ -126,14 +126,14 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 401 response', (done) => {
+  it('should return a 401 response', (done) => {
     api.post('/resources')
     .send(resources[6])
     .set('Accept', 'application/html')
     .expect(401, done)
   })
 
-  xit('should return a 401 response', (done) => {
+  it('should return a 401 response', (done) => {
     api.post('/resources')
     .send(resources[6])
     .set('Accept', 'application/html')
@@ -141,7 +141,7 @@ describe('POST /resources', function() {
     .expect(401, done)
   })
 
-  xit('should return a 200 response 7', (done) => {
+  it('should return a 200 response 7', (done) => {
     api.post('/resources')
       .send(resources[6])
       .set('Accept', 'application/html')
@@ -149,7 +149,7 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  xit('should return a 200 response 8', (done) => {
+  it('should return a 200 response 8', (done) => {
     api.post('/resources')
       .send(resources[7])
       .set('Accept', 'application/html')
