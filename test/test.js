@@ -18,12 +18,11 @@ resources = [
   {title: 'Title 1', url: 'http://www.bbc.com/news/business-36831820', tags: ['news', 'UK'], site_name: 'BBC.co.uk', summary: 'Summary for the first article'},
   {title: 'Title 2', url: 'http://edition.cnn.com/2016/07/19/politics/melania-trump-michelle-obama-speech/index.html', tags: ['news', 'USA'], site_name: 'edition.cnn.com', summary: 'Summary for the second article'},
   {url: 'http://www.todayonline.com/business/opportunity-deals-be-had-office-rents-continue-slide', tags: ['news', 'Singapore'], summary: 'Summary for the third article'},
-  {title: 'Title 4', url: 'http://www.dailymail.co.uk/tvshowbiz/article-3696277/PICTURE-EXCLUSIVE-Christina-Milian-s-plunging-swimsuit-slips-leaves-overexposed-beach-break-Ibiza.html', tags: ['news', 'UK'], site_name: 'dailymail.co.uk', summary: 'Summary for the fourth article'},
   {title: 'Title 5', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the fifth article'},
-  {title: 'Title 6', url: 'http://www.mrbrown.com/blog/2016/07/rules-of-the-all-father-regarding-your-new-iphones.html', tags: ['satire', 'Singapore'], site_name: 'mrbrown.com', summary: 'Summary for the SIXTH article'},
   {url: 'http://edition.cnn.com/2016/07/19/weather/hottest-june-record-world/index.html'},
   {url: 'http://nautil.us/issue/37/currents/the-strange-blissfulness-of-storms?as-seen-on-www.curat.io'},
-  {url: 'https://backchannel.com/inside-the-obama-tech-surge-as-it-hacks-the-pentagon-and-va-8b439bc33ed1'}
+  {url: 'https://backchannel.com/inside-the-obama-tech-surge-as-it-hacks-the-pentagon-and-va-8b439bc33ed1'},
+  {url: 'http://edition.cnn.com/2016/07/20/politics/boris-johnson-john-kerry-presser/index.html'}
 ]
 
 describe('GET /', () => {
@@ -127,6 +126,21 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
+  it('should return a 401 response', (done) => {
+    api.post('/resources')
+    .send(resources[6])
+    .set('Accept', 'application/html')
+    .expect(401, done)
+  })
+
+  it('should return a 401 response', (done) => {
+    api.post('/resources')
+    .send(resources[6])
+    .set('Accept', 'application/html')
+    .set('email', 'blah@blah.com')
+    .expect(401, done)
+  })
+
   it('should return a 200 response 7', (done) => {
     api.post('/resources')
       .send(resources[6])
@@ -135,32 +149,9 @@ describe('POST /resources', function() {
       .expect(201, done)
   })
 
-  it('should return a 401 response', (done) => {
-    api.post('/resources')
-      .send(resources[6])
-      .set('Accept', 'application/html')
-      .expect(401, done)
-  })
-
-  it('should return a 401 response', (done) => {
-    api.post('/resources')
-      .send(resources[6])
-      .set('Accept', 'application/html')
-      .set('email', 'blah@blah.com')
-      .expect(401, done)
-    })
-
   it('should return a 200 response 8', (done) => {
     api.post('/resources')
       .send(resources[7])
-      .set('Accept', 'application/html')
-      .set('email', 'angel@angel.com')
-      .expect(201, done)
-  })
-
-  it('should return a 200 response', (done) => {
-    api.post('/resources')
-      .send(resources[8])
       .set('Accept', 'application/html')
       .set('email', 'angel@angel.com')
       .expect(201, done)
