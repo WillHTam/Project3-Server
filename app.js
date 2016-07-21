@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const ejs = require('ejs')
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://cat:cat@ds051645.mlab.com:51645/project3')
+mongoose.connect('mongodb://cat:cat@ds023465.mlab.com:23465/wombattest')
 
 const logger = require('morgan')
 const appController = require('./controllers/application_controller')
