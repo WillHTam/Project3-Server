@@ -2,9 +2,33 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>API Documentation</title>
   </head>
   <body>
-    <h1>Hiya!</h1>
+    <h1>Welcome to the Stash API!</h1>
+    <h2>Advanced Bookmarking</h2>
+    <p>Hello and welcome to our API. The source code is available at <a href="https://github.com/WillHTam/Project3-Server">this git repo.</a><p>
+    <p>All relevant questions can be directed to Justin Chan at +65 9040 5555</p>
+    <h2>Usage Instructions</h2>
+    <p><b>User Account (Required First)</b></p>
+    <ul>
+      <li>CREATE: To create a user, send a POST request to the path '/register'</li>
+      <li>UPDATE: To edit that user, send a PUT request to '/user'</li>
+      <li>The user schema allows for 'id', 'first_name', 'last_name', 'email', 'password', and 'auth_token'</li>
+      <li>Email and Password are the only required fields. A unique authentication token will be automatically generated upon user creation.</li>
+      <li>To login, send a POST request to '/login'. This will store your email and auth_token in a cookie in your local storage.</li>
+      <li>DELETE: To delete a user, send a DELETE request to '/deleteUser' with the user's email while logged in. WARNING! This will also delete all resources associated with that user.</li>
+    </ul>
+    <p><b>Resources</b></p>
+    <p>The resources schema contains 'id', 'title', 'url', 'site_name', 'description', 'thumbnail', 'tags' which are stored in an array, and 'user'.  One user will belong to a resource, denoting ownership.</p>
+    <p>Each POST of a new resource will send the url to Instaparser to be processed, other fields will be automatically filled as the data is returned.</p>
+    <ul>
+      <li>A header of 'email' and 'auth_token' are required for all requests made to the '/resource'  path. These will be set in your browser's local storage with a successful log in.</li>
+      <li>READ: To see all resources, send a GET request to '/allresources'</li>
+      <li>READ: To see only the resources of the logged in user, send a GET request to '/resources'</li>
+      <li>CREATE: To create a resource, a POST request must be sent to '/resources'. The only required field is a url, preferably that of an article. The url must be sent in 'x-www-form-urlencoded', with a key of 'url', and value as the desired url</li>
+      <li>UPDATE: To update, send a PUT request to '/resources' with the id of the resource.</li>
+      <li>DELETE: To delete, send a DELETE request to '/resources' with the id of the resource.</li>
+    </ul>
   </body>
 </html>
