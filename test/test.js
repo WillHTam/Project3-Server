@@ -37,7 +37,7 @@ describe('GET /', () => {
     .expect(200, done)
   })
 })
-//
+
 // describe('POST /register', function() {
 //   this.timeout(10000)
 //
@@ -251,7 +251,7 @@ describe('GET /', () => {
 //   })
 //
 // })
-
+//
 // describe('DELETE /deleteUser', () => {
 //   it('should remove a user', (done) => {
 //     User.findOne({email: users[1].email}, (err, user) => {
@@ -289,13 +289,13 @@ describe('GET /', () => {
 //   })
 // })
 //
-// describe('PUT /resources', function () {
+// describe('POST /resource', function () {
 //   it('should edit the resource', (done) => {
 //     User.findOne({email: users[2].email}, (err, user) => {
 //       Resources.findOne({user}, (err, resource) => {
 //         if (err) res.status(401).json({error: 'error'})
 //         var resource1 = {id: resource._id, title: 'The Strange Blissfulness of Storms', url: 'http://nautil.us/issue/37/currents/the-strange-blissfulness-of-storms?as-seen-on-www.curat.io', site_name: 'nautil.us', summary: 'EDITED ENTRY', thumbnail: 'http://static.nautil.us/9331_bd9d03102a312711b0a71ecb44581d9d.jpg'}
-//         api.put('/resources')
+//         api.post('/resource')
 //         .set('Accept', 'application/html')
 //         .send(resource1)
 //         .expect(200)
