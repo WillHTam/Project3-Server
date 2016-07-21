@@ -9,7 +9,7 @@ var request = require('request-json')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var apiKey = 'e4f6f26d24b04759ae5b55ebe5e00394'
+var apiKey = 'c6eaaf5f735c4dfc9b96d3bc7fbf104c'
 
 function showAllResources (req, res, err) {
   Resource.find({}, function (err, resources) {
@@ -25,7 +25,7 @@ function seeMyResources (req, res) {
     if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
     Resource.find({user}, function (err, resource) {
       if (err) return res.status(401).json({error: 'Error finding resource'})
-      res.status(200).json(resource)
+      res.status(200).json({message: 'Resource created', resource})
     })
   })
 }

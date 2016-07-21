@@ -63,7 +63,6 @@ function editUser (req, res, next) {
     })
   }
 
-
 function deleteUser (req, res, next) {
   const userEmail = req.body.user.email
   User.findOne({email: userEmail}, (err, user) => {
