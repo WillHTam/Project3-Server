@@ -101,7 +101,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 2', (done) => {
+  it('should return a 201 response 2', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[1].email}, (err, user) => {
       if (err) {
@@ -123,7 +123,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 3', (done) => {
+  it('should return a 201 response 3', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[0].email}, (err, user) => {
       if (err) {
@@ -145,7 +145,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 4', (done) => {
+  it('should return a 201 response 4', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[1].email}, (err, user) => {
       if (err) {
@@ -167,7 +167,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 5', (done) => {
+  it('should return a 201 response 5', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[0].email}, (err, user) => {
       if (err) {
@@ -189,7 +189,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 6', (done) => {
+  it('should return a 201 response 6', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[2].email}, (err, user) => {
       if (err) {
@@ -211,7 +211,7 @@ describe('POST /resources', function() {
     })
   })
 
-  xit('should return a 201 response 7', (done) => {
+  it('should return a 201 response 7', (done) => {
     //console.log("check user email:" + users[0].email)
     User.find({email: users[2].email}, (err, user) => {
       if (err) {
@@ -263,7 +263,11 @@ describe('POST /resources', function() {
         .set('Accept', 'application/html')
         .set('email', 'blah@blah.com')
         .set('auth_token', user[0].auth_token)
-        .expect(401,done)
+        .expect(401)
+        .end( (err, response) => {
+          expect(response.body.error).to.equal('Unauthorised')
+          done()
+        })
       }
     })
   })
@@ -453,7 +457,6 @@ describe('DELETE /deleteUser', () => {
 describe('DELETE /deleteUser', () => {
   it('should remove a user', (done) => {
     User.findOne({email: users[1].email}, (err, user) => {
-      console.log('user found in test: ' + user)
       if (err) res.status(422).json({message: 'Error deleting user'})
       else {
         api.delete('/deleteUser')
@@ -463,7 +466,6 @@ describe('DELETE /deleteUser', () => {
         .set('auth_token', user.auth_token)
         .expect(200)
         .end((err, response) => {
-          console.log(response.body)
           expect(response.body.message).to.equal('User and Resources deleted')
           done()
         })

@@ -23,11 +23,8 @@ function seeMyResources (req, res) {
   // const userParams = new User(req.body)
   User.findOne({email: userEmail}, function (err, user) {
     if (err) return res.status(401).json({error: 'ERROR! ERROR!'})
-    console.log('error1: ' + err)
     Resource.find({user}, function (err, resource1) {
-      console.log('error2: ' + err)
       if (err) return res.status(401).json({error: 'Error finding resource'})
-      console.log("We sent the bloody response")
       res.status(200).json({message: 'Your Resources', resource: resource1})
     })
   })
