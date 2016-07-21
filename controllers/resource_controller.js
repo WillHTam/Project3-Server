@@ -9,7 +9,7 @@ var request = require('request-json')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-var apiKey = 'e4f6f26d24b04759ae5b55ebe5e00394'
+var apiKey = '4b84966e00cc466888753c7cf04df00f'
 
 function showAllResources (req, res, err) {
   Resource.find({}, function (err, resources) {
