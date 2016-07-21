@@ -25,22 +25,18 @@ router.post('/login', applicationController.userLogIn)
 
 // posts !!AND!! user DELETE
 router.delete('/deleteUser', applicationController.userLoggedIn, applicationController.deleteUser)
-// router.delete('/deleteUser', applicationController.deleteUser)
 
 // GET all resources
 router.get('/allresources', resourceController.showAllResources)
 
 // VIEW the logged in user's resources ONLY
 router.get('/resources', applicationController.userLoggedIn, resourceController.seeMyResources)
-// router.get('/resources', resourceController.seeMyResources)
 
 // CREATE resource
 router.post('/resources', applicationController.userLoggedIn, resourceController.makeNewResource)
-// router.post('/resources', resourceController.makeNewResource)
 
 // EDIT resource
 router.put('/resources', applicationController.userLoggedIn, resourceController.updateResource)
-// router.put('/resources', resourceController.updateResource)
 
 // DELETE resource
 router.delete('/resources', applicationController.userLoggedIn, resourceController.deleteResource)
