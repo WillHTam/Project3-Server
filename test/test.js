@@ -8,8 +8,6 @@ const User = require('../models/user')
 const Resources = require('../models/resources')
 const appController = require('../controllers/application_controller')
 
-// stuff
-
 users = [
   {first_name: 'Justin', last_name: 'Chan', email: 'juschanuk@gmail.com', password: 'accounting'},
   {first_name: 'William', last_name: 'Tam', email: 'william.tam@gmail.com', password: 'cat'},
