@@ -39,7 +39,7 @@ describe('GET /', () => {
 })
 
 // describe('POST /register', function() {
-//   this.timeout(10000)
+//   this.timeout(100000000)
 //
 //   it('should return "User created." message', (done) => {
 //     api.post('/register')
