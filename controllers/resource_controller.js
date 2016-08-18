@@ -64,7 +64,9 @@ function reqInstaparser (url, cb) {
 }
 
 function updateResource (req, res) {
-  Resource.findById(req.body.id, (err, resource) => {
+  const resourceId = req.get('id')
+
+  Resource.findById({id: resourceId}, (err, resource) => {
     if (err) return res.status(401).json({error: 'Cannot find resource'})
     resource.title = req.body.title || resource.title
     resource.url = req.body.url || resource.url
