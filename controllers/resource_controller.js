@@ -26,7 +26,7 @@ function seeMyResources (req, res) {
     Resource.find({user}, function (err, resource) {
       if (err) return res.status(401).json({error: 'Error finding resource'})
       res.status(200).json(resource)
-    }).sort('-created_at')
+    }).sort('created_at')
   })
 }
 
