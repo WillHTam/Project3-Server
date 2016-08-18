@@ -43,6 +43,7 @@ function makeNewResource (req, res) {
       resource.description = description
       resource.thumbnail = thumbnail
       resource.user = user._id
+      resource.created_at = new Date()
 
       resource.save((err, resource) => {
         if (err) return res.status(401).json({error: 'error!'})
