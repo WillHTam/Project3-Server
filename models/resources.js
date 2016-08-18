@@ -12,14 +12,14 @@ const resourceSchema = new mongoose.Schema({
   updated_at: Date
 })
 
-resourceSchema.pre('save', function (next) {
-  let now = new Date()
-  this.updated_at = now
-  if (!this.created_at) {
-    this.created_at = now
-  }
-  next()
-})
+// resourceSchema.pre('save', function (next) {
+//   let now = new Date()
+//   this.updated_at = now
+//   if (!this.created_at) {
+//     this.created_at = now
+//   }
+//   next()
+// })
 
 const Resource = mongoose.model('Resource', resourceSchema)
 
