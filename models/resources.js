@@ -7,7 +7,18 @@ const resourceSchema = new mongoose.Schema({
   site_name: String,
   description: String,
   thumbnail: String,
-  user: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'}
+  user: {type: mongoose.Schema.ObjectId, required: true, ref: 'User'},
+  created_at: Date,
+  updated_at: Date
+})
+
+resourceSchema.pre('save', function (next) {
+  let now = new Date()
+  this.updated_at = now
+  if (!this.created_at) {
+    this.created_at = now
+  }
+  next()
 })
 
 const Resource = mongoose.model('Resource', resourceSchema)
