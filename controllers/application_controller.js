@@ -63,7 +63,6 @@ function deleteUser (req, res, next) {
   const userEmail = req.body.user.email
   User.findOne({email: userEmail}, (err, user) => {
     if (err || !user) return res.status(401).json({error: 'Email or password is invalid'})
-
     // user.authenticate(userParams.password, (err, isMatch) => {
     // if (err || !isMatch) return res.status(401).json({error: 'Email or password is invalid'})
     Resource.find({user}).remove().exec()
